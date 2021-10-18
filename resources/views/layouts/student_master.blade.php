@@ -249,20 +249,20 @@
         <div class="nk-sidebar">           
             <div class="nk-nav-scroll">
                 <ul class="metismenu" id="menu">
-                    <li class="nav-label">Dashboard</li>
+                    {{-- <li class="nav-label">Dashboard</li> --}}
                     <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <a class="has-arrow" href="#" aria-expanded="false">
                             <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./index.html">Home 1</a></li>
+                            {{-- <li><a href="./index.html">Home 1</a></li> --}}
                             <!-- <li><a href="./index-2.html">Home 2</a></li> -->
                         </ul>
                     </li>
                     <li class="mega-menu mega-menu-sm">
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        {{-- <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-globe-alt menu-icon"></i><span class="nav-text">Layouts</span>
-                        </a>
+                        </a> --}}
                         <ul aria-expanded="false">
                             <li><a href="./layout-blank.html">Blank</a></li>
                             <li><a href="./layout-one-column.html">One Column</a></li>
@@ -278,20 +278,20 @@
                             <li><a href="layout-fixed-sidebar.html">Fixed Sidebar</a></li>
                         </ul>
                     </li>
-                    <li class="nav-label">Apps</li>
+                    <li class="nav-label"><b>Student Services</b></li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-envelope menu-icon"></i> <span class="nav-text">Email</span>
+                            <i class="icon-note menu-icon"></i> <span class="nav-text"><b>Course Management</b></span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./email-inbox.html">Inbox</a></li>
-                            <li><a href="./email-read.html">Read</a></li>
-                            <li><a href="./email-compose.html">Compose</a></li>
+                            <li><a href="./email-inbox.html">Courses Registration</a></li>
+                            <li><a href="./email-read.html">Print Course Registeration</a></li>
+                            <li><a href="./email-compose.html">Exam Ducket</a></li>
                         </ul>
                     </li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-screen-tablet menu-icon"></i><span class="nav-text">Apps</span>
+                            <i class="icon-screen-tablet menu-icon"></i><span class="nav-text">Payment History</span>
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="./app-profile.html">Profile</a></li>

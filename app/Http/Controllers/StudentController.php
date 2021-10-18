@@ -16,61 +16,9 @@ class StudentController extends Controller
 
     }
 
-    function checklogin(Request $request)
-    {
-        // $this->validate($request, [
-
-
-        //     'matricno' => 'required|matricno',
-        //     'surname' => 'required|surname|min:2'
-
-        // ]);
-
-        $user_data = array(
-
-            'matric_no'  => $request->get('matricno'),
-            'surname'  => $request->get('surname')
-
-        );
-
-        if(Auth::attempt($user_data))
-        {
-            return redirect('student/successlogin');
-
-
-        }
-
-        else {
-
-            return back()->with('error', 'Wrong Login Details ');
-
-        }
-
-
-    }
-
-
-
-    function successlogin()
     
-    {
 
-        return view ('student.dashboard');
-
-
-    }
-
-    function logout()
     
-    {
-
-       Auth::logout();
-       return redirect ('student');
-
-
-    }
-
-
     public function show(){
 
 

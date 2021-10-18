@@ -55,11 +55,11 @@
 
 
                                 <div class="alert alert-danger alert-block">
-                                    <button type="button" class="close" data-dismiss="alert">X</button>
+                                    <button type="button" class="close" data-dismiss="alert">x</button>
                                     <strong>  {{ $message }}  </strong>
                                 
                                 </div>
-                                @endif
+                                @endif 
 
                                 @if (count($errors) > 0 )
                                     <div class="alert alert-danger">
@@ -74,14 +74,17 @@
                                     </div>
                                     @endif
 
-                                <form method="POST" action="{{ url('/student/checklogin')}}" class="mt-5 mb-5 login-input">
-                                    {{-- @csrf --}}
-                                    {{csrf_field()}}
+                                <form method="POST" action="{{ url('student/dashboard')}}" class="mt-5 mb-5 login-input">
+                                    @csrf
+                                    {{-- {{csrf_field()}} --}}
                                     <div class="form-group">
-                                        <input type="text" name="matricno" class="form-control" placeholder="Matric No">
+                                        <input type="text" name="name" class="form-control" placeholder="Matric No" value="{{old('name')}}" >
+                                    {{-- <span class="text-danger"> @error('name'){{$message}}@enderror </span>--}}
+                                    
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" name="surname" class="form-control" placeholder="Surname">
+                                        <input type="password" name="password" class="form-control" placeholder="Surname" value="" >
+                                        {{-- <span class="text-danger"> @error('password'){{$message}}@enderror </span> --}}
                                     </div>
                                     <input type="submit" name="login" class="btn login-form__btn submit w-100" value="Login"  />
                                 </form>

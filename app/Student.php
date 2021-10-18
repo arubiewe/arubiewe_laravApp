@@ -1,11 +1,15 @@
 <?php
 
 namespace App;
-use Illuminate\Foundation\Auth\Student as Authenticatable;
+//use Illuminate\Contracts\Auth\Authenticatable;
+//use Illuminate\Foundation\Auth\Student as Authenticatable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-use Illuminate\Database\Eloquent\Model;
+//class User extends Authenticatable
 
-class Student extends Model
+//use Illuminate\Database\Eloquent\Model;
+
+class Student extends Authenticatable 
 {
 
     

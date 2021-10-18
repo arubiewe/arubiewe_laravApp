@@ -22,6 +22,7 @@ class CreateStudentsTable extends Migration
             $table->unsignedBigInteger('department_id');
             $table->unsignedBigInteger('department_minor_id');
             $table->string('level');
+            $table->string('password');
             $table->timestamps();
         });
     }
