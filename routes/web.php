@@ -31,11 +31,19 @@ Route::get('/welcome', 'CourseController@show');
 Route::get('admin_dashboard/course_reg', 'CourseController@create');
 Route::post('/admin_dashboard/course_reg', 'CourseController@store');
 Route::get('/student', 'CustomAuthController@login');
-//Route::get('student/dashboard', 'CustomAuthController@login');
+//Route::get('/student/dashboard', 'CustomAuthController@login');
 Route::post('student/dashboard', 'CustomAuthController@loginUser');
 //Route::get('student/successlogin', 'StudentController@successlogin');
+Route::get('student/hash', 'CustomAuthController@hash');
 
-//Route::get('/student/show', 'StudentController@show');
+
+Route::get('student/dashboard', 'StudentController@dashboard');
+Route::get('student/dashboard/show', 'StudentController@show');
+
+Route::get('student/course_registration', 'StudentController@studentcourse');
+Route::post('student/course_registration', 'StudentController@store');
+
+// Route::get('student/dashboard/studentcourse', 'StudentController@studentcourse');
 
 // Route::get('hash', function(){
 //  dd(Hash::make('ARUBIEWE'));

@@ -5,24 +5,37 @@
 <div class="container-fluid">
 <h5> Welcome to Your Dashboard Area!</h5>
 
+{{--{{ dd(Auth::guard('students')->student()->id;)}}--}}
+
+
+
 </div>
-@if(isset(Auth::guard('students')->name))
-{{-- <script>window.location = "/student/dashboard";    </script> --}}
-    <div class="alert alert-danger alert-block">
+
+
+
+
+
+{{-- @if(isset(Auth::guard('students')))  --}}
+
+
+{{-- @if(isset(Auth::student())) --}}
+ {{-- <script>window.location = "/student/dashboard";    </script> --}}
+  <div class="jumbotron alert-success" align="center">
     
-        <strong> Welcome {{Auth::guard('students')->name}}  </strong>
-
-    </div>
-    <a href="{{ url ('/student/logout') }}"> Logout </a>
-else
-
-<script>window.location = "/student";    </script> 
-
-@endif
-
-<br/>
+        <h3>Welcome Back ! {{Auth::guard('students')->user()->surname }}  ({{Auth::guard('students')->user()->matric_no }} )</h3>
+        <h4> DEPT:  {{Auth::guard('students')->user()->combination }}
+        {{-- $uss = Auth('students')->user()->matric_no; --}}
+ 
+   
 
 
+{{-- <script>window.location = "/student";    </script>  --}}
+
+{{-- @endif --}}
+
+  </div>
+
+  <a href="{{ url ('/student/logout') }}"> Logout </a>
 
 
 

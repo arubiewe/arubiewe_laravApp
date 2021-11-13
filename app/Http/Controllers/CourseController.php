@@ -47,7 +47,6 @@ class CourseController extends Controller
     }
 
 
-
     public function store(){
        
        $course = new ActiveCourse();

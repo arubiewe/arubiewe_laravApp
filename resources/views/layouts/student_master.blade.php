@@ -9,10 +9,10 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
     <!-- Pignose Calender -->
-    <link href="{{ asset ('./plugins/pg-calendar/css/pignose.calendar.min.css ') }} "  rel="stylesheet">
+    {{-- <link href="{{ asset ('./plugins/pg-calendar/css/pignose.calendar.min.css ') }} "  rel="stylesheet"> --}}
     <!-- Chartist -->
-    <link rel="stylesheet" href=" {{ asset ('./plugins/chartist/css/chartist.min.css ' ) }}">
-    <link rel="stylesheet" href="{{ asset ('./plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css' ) }}">
+    {{-- <link rel="stylesheet" href=" {{ asset ('./plugins/chartist/css/chartist.min.css ' ) }}">
+    <link rel="stylesheet" href="{{ asset ('./plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css' ) }}"> --}}
     <!-- Custom Stylesheet -->
     <link href="{{ asset ('css/style.css') }} " rel="stylesheet">
 
@@ -26,7 +26,7 @@
     <div id="preloader">
         <div class="loader">
             <svg class="circular" viewBox="25 25 50 50">
-                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="2" />
             </svg>
         </div>
     </div>
@@ -251,13 +251,13 @@
                 <ul class="metismenu" id="menu">
                     {{-- <li class="nav-label">Dashboard</li> --}}
                     <li>
-                        <a class="has-arrow" href="#" aria-expanded="false">
-                            <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
+                        <a class="has-arrow" href="{{ url('/student/dashboard') }}" aria-expanded="true">
+                            <i class="icon-speedometer menu-icon"></i><span class="nav-text" >Dashboard</span>
                         </a>
-                        <ul aria-expanded="false">
-                            {{-- <li><a href="./index.html">Home 1</a></li> --}}
-                            <!-- <li><a href="./index-2.html">Home 2</a></li> -->
-                        </ul>
+                        {{-- <ul aria-expanded="false">
+                            <li><a href="{{ url('/student/dashboard') }}">Dashboard</a></li>
+                            <li><a href="./index-2.html">Home 2</a></li> 
+                        </ul> --}}
                     </li>
                     <li class="mega-menu mega-menu-sm">
                         {{-- <a class="has-arrow" href="javascript:void()" aria-expanded="false">
@@ -284,9 +284,9 @@
                             <i class="icon-note menu-icon"></i> <span class="nav-text"><b>Course Management</b></span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./email-inbox.html">Courses Registration</a></li>
-                            <li><a href="./email-read.html">Print Course Registeration</a></li>
-                            <li><a href="./email-compose.html">Exam Ducket</a></li>
+                            <li><a href="{{ url('/student/course_registration') }}">Courses Registration</a></li>
+                            <li><a href="#">Print Course Registeration</a></li>
+                            <li><a href="#">Exam Ducket</a></li>
                         </ul>
                     </li>
                     <li>
@@ -294,11 +294,11 @@
                             <i class="icon-screen-tablet menu-icon"></i><span class="nav-text">Payment History</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./app-profile.html">Profile</a></li>
-                            <li><a href="./app-calender.html">Calender</a></li>
+                            <li><a href="#">Print Reciept</a></li>
+                            <li><a href="#">PaySchool</a></li>
                         </ul>
                     </li>
-                    <li>
+                    {{-- <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-graph menu-icon"></i> <span class="nav-text">Charts</span>
                         </a>
@@ -310,8 +310,8 @@
                             <li><a href="./chart-sparkline.html">Sparkline</a></li>
                             <li><a href="./chart-peity.html">Peity</a></li>
                         </ul>
-                    </li>
-                    <li class="nav-label">UI Components</li>
+                    </li> --}}
+                    {{-- <li class="nav-label">UI Components</li>
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-grid menu-icon"></i><span class="nav-text">UI Components</span>
@@ -393,7 +393,7 @@
                                 </ul>
                             </li>
                         </ul>
-                    </li>
+                    </li> --}}
                 </ul>
             </div>
         </div>
@@ -419,15 +419,16 @@
         <!--**********************************
             Footer start
         ***********************************-->
-        <div class="footer">
-            <div class="copyright">
-                <p>Copyright &copy; Designed & Developed by <a href="">Arubiewe</a> 2021</p>
-            </div>
-        </div>
+        
         <!--**********************************
             Footer end
         ***********************************-->
     </div>
+    <div class="footer">
+            <div class="copyright">
+                <p>Copyright &copy; Designed & Developed by <a href="">Arubiewe</a> 2021</p>
+            </div>
+        </div>
     <!--**********************************
         Main wrapper end
     ***********************************-->
@@ -439,25 +440,25 @@
     <script src="{{ asset ('js/custom.min.js ') }}"></script>
     <script src="{{ asset ('js/settings.js ') }}"></script>
     <script src="{{ asset ('js/gleek.js') }}"></script>
-    <script src="{{ asset ('js/styleSwitcher.js') }}"></script>
+    {{-- <script src="{{ asset ('js/styleSwitcher.js') }}"></script> --}}
 
     <!-- Chartjs -->
-    <script src="./plugins/chart.js/Chart.bundle.min.js"></script>
+    {{-- <script src="./plugins/chart.js/Chart.bundle.min.js"></script> --}}
     <!-- Circle progress -->
     {{-- <script src="./plugins/circle-progress/circle-progress.min.js"></script> --}}
     <!-- Datamap -->
-    <script src="./plugins/d3v3/index.js"></script>
+    {{-- <script src="./plugins/d3v3/index.js"></script>
     <script src="./plugins/topojson/topojson.min.js"></script>
-    <script src="./plugins/datamaps/datamaps.world.min.js"></script>
+    <script src="./plugins/datamaps/datamaps.world.min.js"></script> --}}
     <!-- Morrisjs -->
-    <script src="./plugins/raphael/raphael.min.js"></script>
-    <script src="./plugins/morris/morris.min.js"></script>
+    {{-- <script src="./plugins/raphael/raphael.min.js"></script>
+    <script src="./plugins/morris/morris.min.js"></script> --}}
     <!-- Pignose Calender -->
-    <script src="./plugins/moment/moment.min.js"></script>
-    <script src="./plugins/pg-calendar/js/pignose.calendar.min.js"></script>
+    {{-- <script src="./plugins/moment/moment.min.js"></script>
+    <script src="./plugins/pg-calendar/js/pignose.calendar.min.js"></script> --}}
     <!-- ChartistJS -->
-    <script src="{{ asset ('./plugins/chartist/js/chartist.min.js ') }} "></script>
-    <script src="{{ asset ('./plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js ') }} "></script>
+    {{-- <script src="{{ asset ('./plugins/chartist/js/chartist.min.js ') }} "></script>
+    <script src="{{ asset ('./plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js ') }} "></script> --}}
 
 
 

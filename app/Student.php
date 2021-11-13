@@ -20,6 +20,16 @@ class Student extends Authenticatable
 
         
     }
+
+
+    public function generalcourse()
+
+    {
+        return $this->hasMany('App\GeneralCourse', 'department_id');
+
+        
+    }
+
     
     
         

@@ -43,7 +43,7 @@
                     <div class="form-input-content">
                         <div class="card login-form mb-0">
                             <div class="card-body pt-5">
-                                <a class="text-center" href="index.html"> <h4>Student Login Area! </h4></a>
+                                <a class="text-center" href="index.html"> <h4>Student Login Area! Ooops </h4></a>
                                 <br />
 
                                {{-- @if(isset(Auth::student->matric_no))
@@ -78,12 +78,12 @@
                                     @csrf
                                     {{-- {{csrf_field()}} --}}
                                     <div class="form-group">
-                                        <input type="text" name="name" class="form-control" placeholder="Matric No" value="{{old('name')}}" >
+                                        <input type="text" name="matricno" class="form-control" placeholder="Matric No" value="{{old('name')}}" >
                                     {{-- <span class="text-danger"> @error('name'){{$message}}@enderror </span>--}}
                                     
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" name="password" class="form-control" placeholder="Surname" value="" >
+                                        <input type="password" name="password" class="form-control" placeholder="Password" value="" >
                                         {{-- <span class="text-danger"> @error('password'){{$message}}@enderror </span> --}}
                                     </div>
                                     <input type="submit" name="login" class="btn login-form__btn submit w-100" value="Login"  />

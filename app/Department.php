@@ -18,6 +18,12 @@ class Department extends Model
     {
         return $this->hasMany('App\Student', 'department_id');
     }
+
+    public function generalcourse()
+
+    {
+        return $this->hasMany('App\GeneralCourse', 'department_id');
+    }
    
 
 }

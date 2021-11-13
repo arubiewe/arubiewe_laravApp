@@ -1,91 +1,76 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.student_master')
+@section('content')
 
-        <title>Laravel</title>
+                    <h2>Welcome to Course Reg</h2>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
+                  
+            {{-- {{ $course->course_code }} - {{$course->course_title}} --}}
+                   
+            <div class="container">
+                <form action="course_registration" method="POST" >  
+                    @csrf
+            <table class="table table-hover">
+                    
+                <thead>
+                  <tr>
+                {{-- <td>Id</td> --}}
+                {{-- <th>Course Id</th> --}}
+                <th>#</th>
+                <th>Course Code</th>
+                <th>Course Title</th>
+                {{-- <th>Unit</td>
+                <th>Status</td> --}}
+                <th>Semester</td>
+              
+                </tr>
+                </thead>
+          
+        
+                {{-- @foreach(array_merge($courses) as $course) --}}
+               
+            
+            @foreach ($courses as $course)
+           
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Welcome to Course Reg
-                </div>
-
+            <tbody>
                 
-            </div>
-        </div>
-    </body>
-</html>
+          
+        <tr>
+            <tr id="course{{$course['id']}}">
+            {{-- <td><input type="checkbox" name="course[]" value="{{$course['id']}} {{$course['course_code']}}"></td> --}}
+            <td><input type="checkbox" name="course[]" value="{{$course['id']}} {{$course['course_code']}}" class="check_all"></td>
+            {{-- <th scope="row">1</th> --}} {{-- <td>{{ $course-> id }}</td> --}}
+            {{-- <td>{{ $course-> course_id }}</td> --}}
+            <td> {{ $course['course_code'] }}</td>
+            <td>{{ $course['course_title'] }}</td>
+            <td>{{ $course['semester'] }}</td>
+            
+        </tr>
+            @endforeach
+
+           
+        </tbody>
+      
+               
+    </table>
+    <button type="submit" name="course[]" class="btn btn-success"> CheckAll </button>
+    <div class="" align="center">
+    <button type="submit" name="" class="btn btn-danger"> Register </button>
+    </div>
+
+                </form>
+            </div>      
+
+
+            <script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+<script>
+    $(".check_all").on("click", function(){
+        $(".course[]").each(function(){
+            $(this).attr("checked", true);
+        });
+    });
+</script>
+ @endsection

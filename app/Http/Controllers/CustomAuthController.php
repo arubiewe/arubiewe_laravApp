@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Student;
 use Validator;
+use Session;
+use Hash;
+//use Auth;
+
+
 
 
 class CustomAuthController extends Controller
@@ -22,26 +27,32 @@ class CustomAuthController extends Controller
         //    return view ("student.login");
         $request->validate([
 
-            'name' =>'required',
+            'matricno' =>'required',
             'password' => 'required',
         ]);
 
 
         $user_data = array(
 
-            'name'  => $request->get('name'),
-            'password'  => $request->get('password')
-
+            'matric_no'  => $request->get('matricno'),
+            'password'  => $request->get('password'),     
         );
         
-        //dd($user_data);
-
         if(Auth::guard('students')->attempt($user_data))
         {
             //return redirect ('student/dashboard');
+            //$user_id= Auth::guard('students');
+           
+            //dd($user_id);
+            $user = Auth::guard('students');
+            if (Auth::guard('students')->check()) {
+ 
+                // Thecheck user is logged in...
+                //dd($user);    
+            }
+           
             return view ('student/dashboard');
-
-
+            
         }
         else {
 
@@ -49,12 +60,17 @@ class CustomAuthController extends Controller
 
         }
 
-    
+    }
 
+
+    public function show(){
 
     }
 
-    
+    public function hash(){
+    $sss = Hash::make('OGUNLEYE');
 
-    
+        dd($sss);
+    }
+   
 }   
