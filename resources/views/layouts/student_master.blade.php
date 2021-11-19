@@ -285,7 +285,7 @@
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="{{ url('/student/course_registration') }}">Courses Registration</a></li>
-                            <li><a href="#">Print Course Registeration</a></li>
+                            <li><a href="{{ url('/student/course_form') }}"> Course Form</a></li>
                             <li><a href="#">Exam Ducket</a></li>
                         </ul>
                     </li>

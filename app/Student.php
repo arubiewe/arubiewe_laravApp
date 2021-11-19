@@ -31,7 +31,13 @@ class Student extends Authenticatable
     }
 
     
-    
+    public function studentregistration()
+
+    {
+        return $this->hasMany('App\StudentRegistration', 'student_id', 'course_id');
+
+        
+    }
         
     
    

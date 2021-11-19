@@ -24,8 +24,13 @@
     
         <h3>Welcome Back ! {{Auth::guard('students')->user()->surname }}  ({{Auth::guard('students')->user()->matric_no }} )</h3>
         <h4> DEPT:  {{Auth::guard('students')->user()->combination }}
+          
+          @foreach($dashbaordSession as $dsession)
+          <h5 style="color:blue"> {{ $dsession->session }} Academic Session</h5>
+          
+            {{-- $session = StudentSession::where('id', 1)->value('session');  --}}
         {{-- $uss = Auth('students')->user()->matric_no; --}}
- 
+        @endforeach
    
 
 

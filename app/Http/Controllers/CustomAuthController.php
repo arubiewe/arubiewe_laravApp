@@ -6,9 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Student;
+use App\{ AcademicSession};
 use Validator;
 use Session;
+use DB;
 use Hash;
+use View;
 //use Auth;
 
 
@@ -43,15 +46,23 @@ class CustomAuthController extends Controller
             //return redirect ('student/dashboard');
             //$user_id= Auth::guard('students');
            
+           
             //dd($user_id);
             $user = Auth::guard('students');
+            $dashbaordSession = DB::SELECT("SELECT * FROM academic_sessions WHERE id = 1"); 
+
             if (Auth::guard('students')->check()) {
+
+
+               
  
                 // Thecheck user is logged in...
                 //dd($user);    
             }
            
-            return view ('student/dashboard');
+            //return view ('student/dashboard');
+            
+            return View::make("student/dashboard", compact('dashbaordSession'));
             
         }
         else {

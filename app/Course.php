@@ -15,12 +15,17 @@ class Course extends Model
         
     }
 
-    public function student()
+    public function students()
 
     {
        
         return $this->belongsToMany('App\Student',  'department_id', 'department_minor_id');
         
+    }
+
+    public function studentregistration()
+    {
+        return $this->belongsTo('App\StudentRegistration', 'student_id', 'course_id');
     }
 
     
