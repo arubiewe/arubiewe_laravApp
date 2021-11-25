@@ -9,7 +9,8 @@
                    <marquee class="alert-danger"><b>Note:</b> Please ensure you select the appropriate/correct course for this section, without a successful course registration, No Result</marquee>
 @endforeach
     </div>
-    <hr/>             
+    <hr/>  
+    
             {{-- {{ $course->course_code }} - {{$course->course_title}} --}}
                    
             <div class="container alert-primary">

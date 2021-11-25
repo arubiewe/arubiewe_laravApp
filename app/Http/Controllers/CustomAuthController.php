@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use App\Models\User;
 use App\Models\Student;
 use App\{ AcademicSession};
@@ -38,8 +39,10 @@ class CustomAuthController extends Controller
         $user_data = array(
 
             'matric_no'  => $request->get('matricno'),
-            'password'  => $request->get('password'),     
+            'password'  => strtoupper($request->get('password')),     
         );
+       // dd($user_data);
+        
         
         if(Auth::guard('students')->attempt($user_data))
         {

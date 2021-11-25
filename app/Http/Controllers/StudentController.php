@@ -76,9 +76,7 @@ class StudentController extends Controller
     }
 
 
-    public function store(Request $request){
-        
-       
+    public function store(Request $request){   
        // $courses = $request->input('course');
     //    $selectedcourse = array();
 
@@ -91,8 +89,7 @@ class StudentController extends Controller
         $loggedUser = Auth('students')->user()->id;
         //$courses = $request->course;
         //$session = StudentSession::where('session', '=' , '20' )->get());
-        //$session = AcademicSession::('id', 1)->get(); 
-       
+        //$session = AcademicSession::('id', 1)->get();   
         //dd($session);
         // $session = AcademicSession::select('session')->where('id', 1)->session->get();
         // $session = AcademicSession::select('session')->where('id', 1)->get();
@@ -101,21 +98,23 @@ class StudentController extends Controller
         
         //dd($choose_course);
             //Student::is_present_today($sp)
-
-
-
-      
         $session = AcademicSession::where('id', 1)->value('session');
         //dd($session);
-        //$loggedUser = Auth('students')->user()->matric_no;
         $registrations = new StudentRegistration();
-        $registrations->student_id = ($loggedUser);
-        $registrations->course_id = ($choose);
-        //$registrations->course_id =json_encode($selectedcourse);
+        $data = ['student_id' => $loggedUser, 'course_id' => $choose];
+        $registrations->updateOrCreate(
+            $data, 
+            ['student_id' => $loggedUser, 'course_id' => $choose, 'session' => $session]
+        );
+        //$loggedUser = Auth('students')->user()->matric_no;
+       
+        // $registrations->student_id = ($loggedUser);
+        // $registrations->course_id = ($choose);
+        // //$registrations->course_id =json_encode($selectedcourse);
         
-        $registrations->session = ($session);
+         //$registrations->session = ($session);
 
-        $registrations->save();
+        // $registrations->save();
 
         //return redirect('/welcome');
         //dd($courses);
@@ -156,7 +155,8 @@ class StudentController extends Controller
 
         //$student_id = Auth('students')->user()->id;
         $session = DB::SELECT("SELECT * FROM academic_sessions WHERE id = 1"); 
-       $registration = StudentRegistration::where( 'student_id',  Auth('students')->user()->id )->with('student', 'course')->get();
+       $registration = StudentRegistration::where( 'student_id',  Auth('students')->user()->id )
+                                            ->with('student', 'course')->get();
 
        // $reg = StudentRegistration::where('student_id', 2)->with('student', 'course')->get();
                        
