@@ -1,5 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
+use App\Course;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomAuthController;
@@ -30,6 +32,16 @@ Route::get('/welcome', 'CourseController@show');
 
 Route::get('admin_dashboard/course_reg', 'CourseController@create');
 Route::post('/admin_dashboard/course_reg', 'CourseController@store');
+
+Route::get('admin_dashboard/upload_courses', 'AdminController@create');
+// Route::post('admin_dashboard/upload_courses', 'AdminController@store');
+
+
+
+
+
+
+
 Route::get('/student', 'CustomAuthController@login');
 //Route::get('/student/dashboard', 'CustomAuthController@login');
 Route::post('student/dashboard', 'CustomAuthController@loginUser');

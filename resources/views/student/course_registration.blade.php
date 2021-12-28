@@ -6,14 +6,27 @@
                    
                     @foreach($session as $sesn)
                    <h5> {{ $sesn->session }} Academic Session</h5>
-                   <marquee class="alert-danger"><b>Note:</b> Please ensure you select the appropriate/correct course for this section, without a successful course registration, No Result</marquee>
+                   <marquee class="alert-primary"><b>Note:</b> Please ensure you select the appropriate/correct course for this section, without a successful course registration, No Result</marquee>
 @endforeach
+
+@if ($message =  Session::get('errormsg'))
+<div class="alert alert-danger alert-block">
+    <button type="button" class="close" data-dismiss="alert">X</button>
+    <strong> {{ $message }} </strong>
+</div> 
+@endif
     </div>
+
+
+   
+
+
     <hr/>  
-    
+   
             {{-- {{ $course->course_code }} - {{$course->course_title}} --}}
                    
             <div class="container alert-primary">
+               
                 <form action="course_registration" method="POST" >  
                     @csrf
             <table class="table table-hover">

@@ -10,14 +10,9 @@ use DB;
 
 use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
-
 use App\Models\User;
 //use App\Models\GeneralCourse;
 use View;
-
-
-
-
 use Validator;
 use Session;
 
@@ -87,6 +82,7 @@ class StudentController extends Controller
        
         //dd($courses);
         $loggedUser = Auth('students')->user()->id;
+        $user = StudentRegistration::where('student_id', '=', $loggedUser)->first();
         //$courses = $request->course;
         //$session = StudentSession::where('session', '=' , '20' )->get());
         //$session = AcademicSession::('id', 1)->get();   
@@ -94,12 +90,20 @@ class StudentController extends Controller
         // $session = AcademicSession::select('session')->where('id', 1)->session->get();
         // $session = AcademicSession::select('session')->where('id', 1)->get();
         $choose_course = $request->input('course');
+        if ($user === null) {
         foreach($choose_course as $choose){
         
         //dd($choose_course);
             //Student::is_present_today($sp)
         $session = AcademicSession::where('id', 1)->value('session');
         //dd($session);
+
+    
+            //dd($user);
+        
+           // user doesn't exist
+          // return 'does not exist';
+     
         $registrations = new StudentRegistration();
         $data = ['student_id' => $loggedUser, 'course_id' => $choose];
         $registrations->updateOrCreate(
@@ -119,6 +123,15 @@ class StudentController extends Controller
         //return redirect('/welcome');
         //dd($courses);
         //dd($session);
+    }
+        }
+        else { 
+            
+            $session = AcademicSession::where('id', 1)->value('session');
+            
+           // return 'You have registered already for the '. $session . ' Academic Session' ;
+            return redirect()->back()->with('errormsg', 'You have registered already for the' . $session .  ' Academic Session' );  
+        
         }
 
 
@@ -154,6 +167,9 @@ class StudentController extends Controller
     public function studentcourseregistration(){
 
         //$student_id = Auth('students')->user()->id;
+
+
+
         $session = DB::SELECT("SELECT * FROM academic_sessions WHERE id = 1"); 
        $registration = StudentRegistration::where( 'student_id',  Auth('students')->user()->id )
                                             ->with('student', 'course')->get();
