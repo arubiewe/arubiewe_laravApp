@@ -32,8 +32,8 @@
 
     <div class="form-group col-md-2">
       <label for="inputUnit">Unit</label>
-      <select id="unit" name="unit" class="form-control">
-        <option selected>Choose...</option>
+      <select required id="unit" name="unit" class="form-control">
+        <option value="">Choose..</option>
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>

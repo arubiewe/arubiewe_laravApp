@@ -256,7 +256,7 @@
                             <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./index.html">Home 1</a></li>
+                            {{-- <li><a href="./index.html">Home 1</a></li> --}}
                             <!-- <li><a href="./index-2.html">Home 2</a></li> -->
                         </ul>
                     </li>
@@ -266,8 +266,8 @@
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="/admin_dashboard/course_reg">Create Course</a></li>
-                            <li><a href="./layout-one-column.html">One Column</a></li>
-                            <li><a href="./layout-two-column.html">Two column</a></li>
+                            <li><a href="/admin_dashboard/upload_courses">Upload Courses</a></li>
+                            {{-- <li><a href="./layout-two-column.html">Two column</a></li>
                             <li><a href="./layout-compact-nav.html">Compact Nav</a></li>
                             <li><a href="./layout-vertical.html">Vertical</a></li>
                             <li><a href="./layout-horizontal.html">Horizontal</a></li>
@@ -394,7 +394,7 @@
                                 </ul>
                             </li>
                         </ul>
-                    </li>
+                    </li> --}}
                 </ul>
             </div>
         </div>
