@@ -37,7 +37,6 @@ Route::get('admin_dashboard/upload_courses', 'AdminController@create');
 Route::get('admin_dashboard/upload_courses', 'AdminController@getdepartmentoption');
 Route::post('admin_dashboard/upload_courses', 'AdminController@store');
 // Route::post('admin_dashboard/upload_courses', 'AdminController@store');
-Route::post('admin_dashboard/upload_courses','AdminController@uploadContent');
 
 
 

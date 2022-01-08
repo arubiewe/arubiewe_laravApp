@@ -25,15 +25,11 @@
             <br>
             <div class="row">
                 <div class="col col-md-12">
-                    <p><input type="file" id="exampleInputFile" name="excel_file" class="form-control col-md-3" required > <br> </p>
+                    <p><input type="file" id="exampleInputFile" name="excel_file" class="form-control col-md-3" required > <br> <button type="submit" value="sumbit" class="btn btn-danger">Upload</button></p>
                     
                 </div>
                 
             </div>
-            <button type="submit" value="sumbit" class="btn btn-danger">Upload</button>
-            @error('excel_file')
-                <p class="text-danger">{{$message}}</p>
-            @enderror 
         </form>
     </div>
     

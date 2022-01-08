@@ -2,22 +2,12 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
 
 class Course extends Model
 {
     //
-    use HasFactory;
-     protected $guarded = [
-     'course_code',
-     'course_title',
-     'department_id',
-     'is_general',
-     'semester',
-     'salary'
- ];
+     protected $guarded = [];
 
 
     public function department()
