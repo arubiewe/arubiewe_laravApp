@@ -5,6 +5,7 @@ use App\Course;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomAuthController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,10 +34,13 @@ Route::get('/welcome', 'CourseController@show');
 Route::get('admin_dashboard/course_reg', 'CourseController@create');
 Route::post('/admin_dashboard/course_reg', 'CourseController@store');
 
+
+Route::post('/upload_courses', [AdminController::class, 'import_course'])->name('import_course');
+
 Route::get('admin_dashboard/upload_courses', 'AdminController@create');
-Route::get('admin_dashboard/upload_courses', 'AdminController@getdepartmentoption');
 Route::post('admin_dashboard/upload_courses', 'AdminController@store');
-// Route::post('admin_dashboard/upload_courses', 'AdminController@store');
+Route::get('admin_dashboard/upload_courses', 'AdminController@batchup');
+Route::get('admin_dashboard/upload_courses', 'AdminController@getdepartmentoption');
 
 
 

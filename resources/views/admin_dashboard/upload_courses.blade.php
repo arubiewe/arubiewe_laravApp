@@ -8,38 +8,54 @@
 
 <title>Course Upload </title>
 
+
+
 <div class="container-fluid">
+    <div class="col-md-12">
+        @if(Session::has('success'))
+            <div class="alert alert-danger" role="alert">
+                {{Session::get('success')}}
+            </div>
+        @endif
+    </div>
     
     <div class="jumbotron alert alert-grey">
+       
+
+
         <h5>Batch Upload </h5>
-        <form method="POST" action="/admin_dashboard/upload_courses" enctype="multipart/form-data" >
+        
+        <form method="POST" action="{{route('import_course')}}" enctype="multipart/form-data" >
             @csrf
-            <select id="optiondept" name="optiondept" class="form-control col-md-8 dynamic" data-live-search="true" required >
+            <select id="optiondeptt" name="optiondeptt" class="form-control col-md-8 dynamic" data-live-search="true" required >
                 <option value="">Choose Department</option>
-                @foreach ($department as $optiondept)
+                @foreach ($department as $optiondeptt)
                 
-                    <option value="{{ $optiondept->id }}">{{ $optiondept->name }}</option>
+                    <option value="{{ $optiondeptt->id }}">{{ $optiondeptt->name }}</option>
                 
                 @endforeach
             </select>
             <br>
             <div class="row">
                 <div class="col col-md-12">
-                    <p><input type="file" id="exampleInputFile" name="excel_file" class="form-control col-md-3" required > <br> <button type="submit" value="sumbit" class="btn btn-danger">Upload</button></p>
+                    <p><input type="file" id="exampleInputFile" name="excel_file" class="form-control col-md-3" required > <br> 
+                    
+                       
                     
                 </div>
-                
+                <button type="submit" value="sumbit" class="btn btn-danger">Upload</button></p>
             </div>
         </form>
     </div>
     
-</div>
+
 <hr>
 
 <form method="POST" action="/admin_dashboard/upload_courses" >
     @csrf
     <h5> Select Department </h5>
-    <select id="optiondept" name="optiondept" class="form-control col-md-8 dynamic" data-live-search="true" required >
+  
+    <select id="optiondept" name="optiondept" class="form-control col-md-8 dynamic" required >
         <option value="">Choose...</option>
         @foreach ($department as $optiondept)
         
@@ -67,7 +83,7 @@
     
     
     
-    <div class="form-row">
+    <div class="form row">
         
         
         <div class="col-md-12">
@@ -171,41 +187,32 @@
                     
                 </tr>
             </table>
+            <button type="submit" value="sumbit" class="btn btn-success">Save</button>
         </div>
+
+       
     </div>
     
-    <button type="submit" value="sumbit" class="btn btn-success">Save</button>
 </form>
-
-
-
-</div>
-
-
-
 </div>
 
 
 
 
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+
+
+
+
+{{-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> --}}
 <script>
     var i = 0;
     $("#addRemoveIp").click(function () {
         ++i;
+
+    
         
-        $("#multiForm").append('<tr><td><input type="text" name="multiInput['+i+'][coursecode]" class="form-control"required <tr><td><input type="text" name="multiInput['+i+'][title]" class="form-control"required <tr><td><select name = multiInput['+i+'][unit]" class="form-control" required> <option value="">Choose...</option> <option>  1 </option> <option> 2 </option>  <option> 3 </option> <option> 4 </option> <option> 5 </option><option> 6 </option></select></td> <td><select name = multiInput['+i+'][status]" class="form-control"required> <option value="">Choose...</option> <option>  C </option> <option> E </option> </select></td> <td><select name = multiInput['+i+'][semester]" class="form-control"required> <option value="">Choose...</option> <option>  First  </option> <option> Second  </option> </select> <td><select name = multiInput['+i+'][isgeneral]" class="form-control" required> <option value="">Choose...</option> <option value="0">  No </option> <option value="1"> Yes </option> </select></td><td><button type="button" class="remove-item btn btn-danger">Delete</button></td></tr> ');
-        
-        
-        
-        
-        //latest working:- $("#multiForm").append('<tr><td><input type="text" name="multiInput['+i+'][coursecode]" class="form-control" <tr><td><input type="text" name="multiInput['+i+'][title]" class="form-control" <tr><td><select name = multiInput['+i+'][unit]" class="form-control"> <option>  1 </option> <option> 2 </option></select></td> <td><select name = multiInput['+i+'][status]" class="form-control"> <option>  C </option> <option> E </option> </select></td></td><td><button type="button" class="remove-item btn btn-danger">Delete</button></td></tr> ' );
-        
-        
-        //working:- $("#multiForm").append('<tr><td><input type="text" name="multiInput['+i+'][coursecode]" class="form-control" <tr><td><input type="text" name="multiInput['+i+'][title]" class="form-control" <tr><td><select name = multiInput['+i+'][unit]" class="form-control"> <option value="1"> 1 </option> <option value="1"> 2 </option> </select></td></td></td><td><button type="button" class="remove-item btn btn-danger">Delete</button></td></tr> ' );
-        
-        //  $("#multiForm").append('<tr><td><select name = multiInput['+i+'][unit]" class="form-control"> <option> PHP </option></select></td></tr>');
-        
+        $("#multiForm").append('<tr><td><input type="text" name="multiInput['+i+'][coursecode]" class="form-control"required <tr><td><input type="text" name="multiInput['+i+'][title]" class="form-control" required <tr><td><select name="multiInput['+i+'][unit]" class="form-control"> <option value="">Choose...</option> <option>  1 </option> <option> 2 </option>  <option> 3 </option> <option> 4 </option> <option> 5 </option><option> 6 </option></select></td> <td><select name = "multiInput['+i+'][status]" class="form-control" > <option value="">Choose...</option> <option>  C </option> <option> E </option> </select></td> <td><select name="multiInput['+i+'][semester]" class="form-control" > <option value="">Choose...</option> <option>  First  </option> <option> Second  </option> </select> <td><select name ="multiInput['+i+'][isgeneral]" class="form-control" > <option value="">Choose...</option> <option value="0">  No </option> <option value="1"> Yes </option> </select></td><td><button type="button" class="remove-item btn btn-danger">Delete</button></td></tr> ');
         
     });
     
@@ -217,7 +224,6 @@
     
     
 </script>
-
 
 
 

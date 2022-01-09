@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\CoursesImport;
 use Illuminate\Http\Request;
+
+
 //Use App\Department;
 use App\{Department};
 Use App\Course;
@@ -11,6 +15,8 @@ use View;
 class AdminController extends Controller
 {
     //
+
+
 
     public function index()
     
@@ -38,30 +44,38 @@ class AdminController extends Controller
 
     }
     public function store(Request $request){
+
+        // $request->validate([
+
+        //     'coursecode' =>'required',
+        //     'title' => 'required',
+        //     'isgeneral' => 'required',
+        //     'semester' => 'required',
+        // ]);
        
         $selectedDept = $request->get('optiondept');
-        //dd($selectedDept);
-        //dd($request);
-
-        // foreach ($request->all() as $request){
-            foreach ($request['multiInput'] as $request){
-
-            //dd($request['coursecode']);
-            //dd($request->all());   
-            //$saveModel = new Model();
+       //dd($request['multiInput']);
+             foreach($request['multiInput'] as $request){
+            
+            
             $upload_course = new Course();
             $upload_course->course_code = $request['coursecode'];
             $upload_course->course_title = $request['title'];
             $upload_course->department_id = $selectedDept;
             $upload_course->is_general = $request['isgeneral'];
             $upload_course->semester = $request['semester'];
-            //dd($upload_course);
-            $upload_course->save();
+             
+        
             
-            return redirect()->back()->with('success','Course Successfully Added!');
+           $upload_course->save();
+           
+           // return redirect()->back()->with('success','Course Successfully Added!');
+       
         }
 
-        //dd(34);
+        return redirect()->back()->with('success','Course Successfully Added!');
+           
+
 
         // $request->validate([
         //     'addMoreInputFields.*.course_code' => 'required'
@@ -75,21 +89,20 @@ class AdminController extends Controller
     
     }
 
-    // public function saveData(Request  $request){
+    
+    public function import_course(Request $request){
 
-    //     foreach ($request->all() as $request){
-    //         //$saveModel = new Model();
-    //         $upload_course = new Course();
-    //         $upload_course->course_code = $request->value;
-    //         $upload_course->course_title = $request->value;
-    //         $upload_course->department_id = $request->value;
-    //         $upload_course->is_general = $request->value;
-    //         $upload_course->semester = $request->value;
-    //         $upload_course->save();
-    //     }
+        $request->validate([
+            'excel_file' => 'required|mimes:xlsx'
+        ]);
 
 
-    // }
+        Excel::import(new CoursesImport, $request->file('excel_file') );
+
+        return redirect()->back()->with('success', 'Batch Courses Successfully Uploaded');
+
+
+    }
 
 
 
