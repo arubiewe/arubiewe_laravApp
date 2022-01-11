@@ -29,7 +29,7 @@ class AdminController extends Controller
 
     public function create(){
 
-    return view('admin_dashboard.upload_courses');
+        return view('admin_dashboard.upload_courses');
 
     }
 
@@ -39,25 +39,21 @@ class AdminController extends Controller
        //dd($department);
         return View::make('admin_dashboard.upload_courses', compact('department'));
 
-
-
-
     }
     public function store(Request $request){
 
-        // $request->validate([
-
-        //     'coursecode' =>'required',
-        //     'title' => 'required',
-        //     'isgeneral' => 'required',
-        //     'semester' => 'required',
-        // ]);
+        $request->validate([
+            'coursecode' =>'required',
+            'title' => 'required',
+            'isgeneral' => 'required',
+            'semester' => 'required',
+        ]);
        
         $selectedDept = $request->get('optiondept');
        //dd($request['multiInput']);
-             foreach($request['multiInput'] as $request){
-            
-            
+
+            foreach($request['multiInput'] as $request){  
+
             $upload_course = new Course();
             $upload_course->course_code = $request['coursecode'];
             $upload_course->course_title = $request['title'];
@@ -65,8 +61,6 @@ class AdminController extends Controller
             $upload_course->is_general = $request['isgeneral'];
             $upload_course->semester = $request['semester'];
              
-        
-            
            $upload_course->save();
            
            // return redirect()->back()->with('success','Course Successfully Added!');
@@ -74,18 +68,6 @@ class AdminController extends Controller
         }
 
         return redirect()->back()->with('success','Course Successfully Added!');
-           
-
-
-        // $request->validate([
-        //     'addMoreInputFields.*.course_code' => 'required'
-        // ]);
-     
-        // foreach ($request->addMoreInputFields as $key => $value) {
-        //     Student::create($value);
-        // }
-     
-        // return back()->with('success', 'New subject has been added.');
     
     }
 
@@ -93,10 +75,10 @@ class AdminController extends Controller
     public function import_course(Request $request){
 
         $request->validate([
-            'excel_file' => 'required|mimes:xlsx'
-        ]);
-
-
+            'excel_file' => 'required|mimes:xlsx',
+            'optiondeptt' => 'required|int',
+            ]);
+        
         Excel::import(new CoursesImport, $request->file('excel_file') );
 
         return redirect()->back()->with('success', 'Batch Courses Successfully Uploaded');

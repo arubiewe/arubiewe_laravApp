@@ -13,19 +13,34 @@ class CoursesImport implements ToModel, WithHeadingRow
     *
     * @return \Illuminate\Database\Eloquent\Model|null
     */
-    public function model(array $row)
-    {
+    // public function model(array $row)
+    // {
 
         
        
-        return new Course([
-            //
+        // return new Course([
           
-           'course_code'   => $row['course_code'],
-           'course_title'  => $row['course_title'],
-           'department_id' => $row['department_id'],
-           'is_general'    => $row['isgeneral'], 
-           'semester'      => $row['semester'],   
-        ]);
+        //    'course_code'   => $row['course_code'],
+        //    'course_title'  => $row['course_title'],
+        //    'department_id' => $row['department_id'],
+        //    'is_general'    => $row['isgeneral'], 
+        //    'semester'      => $row['semester'],   
+        // ]);
+
+        public function model(array $row)
+        {
+           
+        
+            return new Course([
+               
+               'course_code'   => $row['course_code'],
+               'course_title'  => $row['course_title'],
+               'department_id' => $row['department_id'],
+               'is_general'    => $row['isgeneral'], 
+               'semester'      => $row['semester'],  
+            ]);
+           
     }
 }
+
+//}

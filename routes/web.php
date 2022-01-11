@@ -30,7 +30,6 @@ Route::get('/index', 'CourseController@index');
 Route::get('admin_dashboard/dashboard', 'AdminController@index');
 
 Route::get('/welcome', 'CourseController@show');
-
 Route::get('admin_dashboard/course_reg', 'CourseController@create');
 Route::post('/admin_dashboard/course_reg', 'CourseController@store');
 
@@ -57,9 +56,7 @@ Route::get('student/hash', 'CustomAuthController@hash');
 
 Route::get('student/dashboard', 'StudentController@dashboard');
 Route::get('student/dashboard/show', 'StudentController@show');
-
 Route::get('student/course_registration', 'StudentController@studentcourse');
-
 Route::post('student/course_registration', 'StudentController@store');
 Route::get('student/course_form', 'StudentController@studentcourseregistration');
 
