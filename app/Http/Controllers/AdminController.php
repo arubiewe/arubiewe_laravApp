@@ -71,20 +71,36 @@ class AdminController extends Controller
     
     }
 
-    
     public function import_course(Request $request){
 
         $request->validate([
             'excel_file' => 'required|mimes:xlsx',
             'optiondeptt' => 'required|int',
             ]);
+        $departmentId = $request->optiondeptt;
         
-        Excel::import(new CoursesImport, $request->file('excel_file') );
+        Excel::import(new CoursesImport($departmentId), $request->file('excel_file') );
 
         return redirect()->back()->with('success', 'Batch Courses Successfully Uploaded');
 
-
     }
+   
+
+
+    
+    // public function import_course(Request $request){
+
+    //     $request->validate([
+    //         'excel_file' => 'required|mimes:xlsx',
+    //         'optiondeptt' => 'required|int',
+    //         ]);
+        
+    //     Excel::import(new CoursesImport, $request->file('excel_file') );
+
+    //     return redirect()->back()->with('success', 'Batch Courses Successfully Uploaded');
+
+
+    // }
 
 
 
