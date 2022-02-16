@@ -95,7 +95,10 @@
                     <th>Course Unit</th>
                     <th>Course Status</th>
                     <th>Course Semester</th>
-                    <th>IsGeneral</th>
+                    <th>IsOld  Course</th>
+                    <th>Is     General</th>
+                    <th>Level</th>
+                    
                     <th>Action</th>
                 </tr>
                 
@@ -104,26 +107,26 @@
                 <tr>
                     
                     
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         
                         <!-- <label for="inputCourseCode">Course Code</label> -->
                         <td class="">
                             
-                            <input type="text" class="form-control" id="coursecode" name="multiInput[0][coursecode]" required>
+                            <input type="text" class="form-control" id="course_code" size="23" name="multiInput[0][coursecode]" required>
                         </td>
                         
                     </div>
                     
                     
-                    <div class="col-md-10">
+                    <div class="col-md-8">
                         <td class="">
                             <!-- <label for="inputCourseTitle">Course Title</label> -->
-                            <input type="text" class="form-control" size="195" id="title" name="multiInput[0][title]" required>
+                            <input type="text" class="form-control" size="180" id="title" name="multiInput[0][title]" required>
                         </td>
                     </div>
                     
                     
-                    <div class="form-group col-md-8">
+                    <div class="form-group col-md-6">
                         
                         <td>
                             <!-- <label for="inputUnit">Unit</label> -->
@@ -166,6 +169,19 @@
                             </select>
                         </td>
                     </div>
+
+                    <div class="form-group col-md-8">
+                        <td>
+                            <!--  <label for="inputSemester">Is General</label> -->
+                            
+                            <select id="curriculum" name="multiInput[0][isoldcurriculum]" class="form-control" required>
+                                <option value="">Choose...</option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                                
+                            </select>
+                        </td>
+                    </div>
                     
                     
                     <div class="form-group col-md-8">
@@ -176,6 +192,19 @@
                                 <option value="">Choose...</option>
                                 <option value="0">No</option>
                                 <option value="1">Yes</option>
+                                
+                            </select>
+                        </td>
+                    </div>
+
+                    <div class="form-group col-md-8">
+                        <td>
+                            <!-- <label for="inputSemester">Semester</label> -->
+                            <select id="level" name="multiInput[0][level]" class="form-control" required>
+                                <option value="">Choose...</option>
+                                <option value="First ">100</option>
+                                <option value="Second ">200</option>
+                                <option value="Second ">300</option>
                                 
                             </select>
                         </td>
@@ -212,7 +241,7 @@
 
     
         
-        $("#multiForm").append('<tr><td><input type="text" name="multiInput['+i+'][coursecode]" class="form-control"required <tr><td><input type="text" name="multiInput['+i+'][title]" class="form-control" required <tr><td><select name="multiInput['+i+'][unit]" class="form-control"> <option value="">Choose...</option> <option>  1 </option> <option> 2 </option>  <option> 3 </option> <option> 4 </option> <option> 5 </option><option> 6 </option></select></td> <td><select name = "multiInput['+i+'][status]" class="form-control" > <option value="">Choose...</option> <option>  C </option> <option> E </option> </select></td> <td><select name="multiInput['+i+'][semester]" class="form-control" > <option value="">Choose...</option> <option>  First  </option> <option> Second  </option> </select> <td><select name ="multiInput['+i+'][isgeneral]" class="form-control" > <option value="">Choose...</option> <option value="0">  No </option> <option value="1"> Yes </option> </select></td><td><button type="button" class="remove-item btn btn-danger">Delete</button></td></tr> ');
+        $("#multiForm").append('<tr><td><input type="text" name="multiInput['+i+'][coursecode]" class="form-control"required <tr><td><input type="text" name="multiInput['+i+'][title]" class="form-control" required <tr><td><select name="multiInput['+i+'][unit]" class="form-control"> <option value="">Choose...</option> <option>  1 </option> <option> 2 </option>  <option> 3 </option> <option> 4 </option> <option> 5 </option><option> 6 </option></select></td> <td><select name = "multiInput['+i+'][status]" class="form-control" > <option value="">Choose...</option> <option>  C </option> <option> E </option> </select></td> <td><select name="multiInput['+i+'][semester]" class="form-control" > <option value="">Choose...</option> <option>  First  </option> <option> Second  </option> </select> <td><select name ="multiInput['+i+'][multiInput[0][isoldcurriculum]" class="form-control" > <option value="">Choose...</option> <option value="1">  Yes </option> <option value="0"> No </option> </select></td> <td><select name ="multiInput['+i+'][isgeneral]" class="form-control" > <option value="">Choose...</option> <option value="0">  No </option> <option value="1"> Yes </option> </select></td>   <td><select name ="multiInput['+i+'][multiInput[0][level]" class="form-control" > <option value="">Choose...</option> <option value="100">  100 </option> <option value="200"> 200 </option> <option value="300"> 200 </option> </select></td>   <td><button type="button" class="remove-item btn btn-danger">Delete</button></td></tr> ');
         
     });
     

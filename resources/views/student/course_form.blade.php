@@ -111,8 +111,8 @@
 {{-- <td>{{ $course-> course_id }}</td> --}}
 <td> {{ $reg->course->course_code }}</td>
 <td> {{ $reg->course->course_title }}</td>
-<td> Unit</td>
-<td> Status</td>
+<td>{{ $reg->course->course_unit }}</td>
+<td>{{ $reg->course->course_status }}</td>
 <td> {{ $reg->course->semester }}</td>
 {{-- <td>{{ $reg['course_title'] }}</td>
 <td>{{ $reg['semester'] }}</td> --}}

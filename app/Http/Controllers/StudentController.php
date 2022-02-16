@@ -186,6 +186,12 @@ class StudentController extends Controller
 
 
     }
+
+    public function viewregistration(){
+
+        return view('student.view_registration');
+
+    }
     
     
     
