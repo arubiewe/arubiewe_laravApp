@@ -72,37 +72,16 @@ class StudentController extends Controller
 
 
     public function store(Request $request){   
-       // $courses = $request->input('course');
-    //    $selectedcourse = array();
-
-    //    foreach($courses as $course){
-    //       $selectedcourse[] = $course;
-    //    }
-        //$courses = implode(",", $request->get('course'));
-       
-        //dd($courses);
+      
         $loggedUser = Auth('students')->user()->id;
         $user = StudentRegistration::where('student_id', '=', $loggedUser)->first();
-        //$courses = $request->course;
-        //$session = StudentSession::where('session', '=' , '20' )->get());
-        //$session = AcademicSession::('id', 1)->get();   
-        //dd($session);
-        // $session = AcademicSession::select('session')->where('id', 1)->session->get();
-        // $session = AcademicSession::select('session')->where('id', 1)->get();
+      
         $choose_course = $request->input('course');
         if ($user === null) {
         foreach($choose_course as $choose){
         
-        //dd($choose_course);
-            //Student::is_present_today($sp)
         $session = AcademicSession::where('id', 1)->value('session');
-        //dd($session);
-
-    
-            //dd($user);
         
-           // user doesn't exist
-          // return 'does not exist';
      
         $registrations = new StudentRegistration();
         $data = ['student_id' => $loggedUser, 'course_id' => $choose];
@@ -110,19 +89,9 @@ class StudentController extends Controller
             $data, 
             ['student_id' => $loggedUser, 'course_id' => $choose, 'session' => $session]
         );
-        //$loggedUser = Auth('students')->user()->matric_no;
-       
-        // $registrations->student_id = ($loggedUser);
-        // $registrations->course_id = ($choose);
-        // //$registrations->course_id =json_encode($selectedcourse);
         
-         //$registrations->session = ($session);
 
-        // $registrations->save();
 
-        //return redirect('/welcome');
-        //dd($courses);
-        //dd($session);
     }
         }
         else { 
@@ -180,12 +149,16 @@ class StudentController extends Controller
 
         return View::make("student/course_form", compact('registration', 'session'));
 
-
-
-
-
-
     }
+
+    public function showreghistory($id)
+    {
+        $student = RegHistroy::firstOrFind($id);
+        return view('');
+    }
+
+
+
 
     public function viewregistration(){
 

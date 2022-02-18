@@ -59,7 +59,10 @@ Route::get('student/dashboard/show', 'StudentController@show');
 Route::get('student/course_registration', 'StudentController@studentcourse');
 Route::post('student/course_registration', 'StudentController@store');
 Route::get('student/course_form', 'StudentController@studentcourseregistration');
-Route::get('student/view_registration', 'StudentController@viewregistration');
+ Route::get('student/view_registration', 'StudentController@viewregistration');
+
+ 
+
 
 
 // Route::get('student/dashboard/studentcourse', 'StudentController@studentcourse');
