@@ -38,8 +38,12 @@
       <h5> COURSE REGISTRATION FORM - {{ $sesn->session }} Academic Session </h5>
    @endforeach
  </center>
+ 
 </div>
 
+<div class="container">
+  <img src="{{ asset ('images/logo.png') }}" alt="" width="100px" height="100px" align="right">
+</div>
 
   <h5><center>PERSONAL INFORMATION</center></h5>
 
