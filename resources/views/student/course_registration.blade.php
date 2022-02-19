@@ -38,8 +38,8 @@
                 <th>#</th>
                 <th>Course Code</th>
                 <th>Course Title</th>
-                {{-- <th>Unit</td>
-                <th>Status</td> --}}
+                <th>Unit</td>
+                <th>Status</td>
                 <th>Semester</td>
               
                 </tr>
@@ -63,6 +63,8 @@
             {{-- <td>{{ $course-> course_id }}</td> --}}
             <td> {{ $course['course_code'] }}</td>
             <td>{{ $course['course_title'] }}</td>
+            <td>{{ $course['course_unit'] }}</td>
+            <td>{{ $course['course_status'] }}</td>
             <td>{{ $course['semester'] }}</td>
             
         </tr>

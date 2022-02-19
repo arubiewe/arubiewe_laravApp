@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AcademicSession extends Model
+class Semester extends Model
 {
-    
+    //
 }

@@ -14,16 +14,17 @@
     </tr>
  
 
+    @foreach ($reghistory as $history)
     <tr>
       
-      <td> 09/54656 </td>
-      <td> 2020/2021</td>
-      <td>First </td>
-      <td> <a href="" class="btn btn alert-danger"> View</td>
-      <td> <a href="" class="btn btn alert-danger"> Edit </a></td>
+      <td> {{ $history->matric_no }} </td>
+      <td>{{ $history->session }}</td>
+      <td>{{ $history->semester }}</td>
+      <td><li> <a href="" class="btn btn alert-danger"> View <li></td>
+      
     </tr>
     
- 
+    @endforeach 
 </table>
 
 

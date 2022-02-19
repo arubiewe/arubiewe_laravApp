@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\{ActiveCourse, Course };
 use App\{GenCourse , GeneralCourse, AcademicSession, StudentRegistration};
-//Use App\StudentRegistration;
+Use App\{RegHistory, Semester};
 use DB;
 
 use App\Models\Student;
@@ -43,22 +43,7 @@ class StudentController extends Controller
 
        dd($uss);
 
-        //$user = Auth::user();
-        // $user = Auth::guard('students');
-        
-
-    //     $user_idz = Auth::guard('students');
-           
-    // dd($user_idz);
-        //$studentMajorDept = Student::where('matric_no', )->get();
-        //$studentMinorDept = Student::all();
-
-        //dd($studentMajorDept);
-
-
-        //$courses = Course::where('department_id', 1 )->orWhere ('department_id', 2)->get();
-       // dd($courses);
-
+    
     }
 
     public function create(){
@@ -74,7 +59,11 @@ class StudentController extends Controller
     public function store(Request $request){   
       
         $loggedUser = Auth('students')->user()->id;
+        $loggedUserMatric = Auth('students')->user()->matric_no;
         $user = StudentRegistration::where('student_id', '=', $loggedUser)->first();
+        
+        $semester = Semester::where('id', 1)->value('semester_name');
+     //dd($semester);
       
         $choose_course = $request->input('course');
         if ($user === null) {
@@ -90,9 +79,28 @@ class StudentController extends Controller
             ['student_id' => $loggedUser, 'course_id' => $choose, 'session' => $session]
         );
         
-
+        $reg_history = new RegHistory();
+        $data = ['student_id' => $loggedUser, 'matric_no' => $loggedUserMatric];
+        $reg_history->updateOrCreate(
+            $data, 
+            ['student_id' => $loggedUser, 'matric_no' => $loggedUserMatric, 'session' => $session, 'semester' => $semester]
+        );
 
     }
+
+    // $student_matricno = Auth('students')->user()->matric_no;
+
+    //     //dd($student_matricno);
+    //     $semester = DB::SELECT("SELECT * FROM semesters WHERE id = 1"); 
+    //     $reg_history = new RegHistory();
+      
+    //     $reg_history->student_id = $user;
+    //     $reg_history->matric_no = $student_matricno;
+    //     $reg_history->session = $session;
+    //     $reg_history->semester = $semester;
+    //     $reg_history->save();
+    
+
         }
         else { 
             
@@ -161,8 +169,13 @@ class StudentController extends Controller
 
 
     public function viewregistration(){
+       
 
-        return view('student.view_registration');
+        //$reghistory = RegHistory::where( 'student_id',  Auth('students')->user()->id );
+        $reghistory = RegHistory::where( 'student_id',  Auth('students')->user()->id )
+        ->with('student')->get();
+
+        return view('student.view_registration', compact('reghistory'));
 
     }
     

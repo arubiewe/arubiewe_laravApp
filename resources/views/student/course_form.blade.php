@@ -1,6 +1,16 @@
-@extends('layouts.student_master')
-@section('content')
-<style>
+{{-- @extends('layouts.student_master')
+@section('content') --}}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> Course Form </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  </head>
+
+<body>
+
+{{-- <style>
   table, th, td {
     border: 1px solid grey;
     
@@ -16,69 +26,40 @@
   width: 100%;
 }
   
-  </style>
+  </style> --}}
 <div class="container alert-primary" align="center" >
    
    
 <hr/> 
 
-<h3> <center> ADENIRAN OGUNSANYA COLLEGE OF EDUCATION </center></h3> <h4><center> KM 30, BADAGRY EXPRESSWAY, OTO/IJANIKIN LAGOS. </center></h4>    
+<h4> <center> ADENIRAN OGUNSANYA COLLEGE OF EDUCATION </center></h4> <h4><center> KM 30, BADAGRY EXPRESSWAY, OTO/IJANIKIN LAGOS. </center></h4>    
     <center>
        @foreach($session as $sesn)
       <h5> COURSE REGISTRATION FORM - {{ $sesn->session }} Academic Session </h5>
-      <marquee class="alert-danger"><b>Note:</b> Please ensure you print the course registration form</marquee>
    @endforeach
  </center>
 </div>
 
 
   <h5><center>PERSONAL INFORMATION</center></h5>
-  <div class="container-fluid">
-
-  <table border="1px"> 
 
 
+<div class="container-fluid">
   
-  <tr>
-    <td>
-      <p><b>MATRIC NO :</b> {{Auth::guard('students')->user()->matric_no }} </p>
-    </td>
-  </tr>
+      <b>Matric No :</b> {{Auth::guard('students')->user()->matric_no }} <br/>
+      <b>Surname :</b> {{Auth::guard('students')->user()->surname }} </p>
+      <b>Other Names :</b> {{Auth::guard('students')->user()->other_names }}  </p>
+      <p><b>Combination :</b> {{Auth::guard('students')->user()->combination }} </p>
+      <p><b>Combination :</b> </p>
+    
 
-  <tr>
-    <td >
-      <p><b>SURNAME :</b>{{Auth::guard('students')->user()->surname }} </p>
-    </td>
-  </tr>
-
-  <tr>
-    <td >
-      <p><b>OTHER NAMES :</b> {{Auth::guard('students')->user()->other_names }}  </p>
-    </td>
-  </tr>
-
-  <tr>
-    <td>
-      <p><b>COMBINATION :</b> {{Auth::guard('students')->user()->combination }} </p>
-    </td>
-
-    <td>
-      <p><b>&nbsp; &nbsp;  &nbsp; COMBINATION :</b> </p>
-    </td>
-  </tr>
-
-
-
-</table>
-  </div>
 
 
 <br>
-<div class="container alert-primary">
-<form action="" method="">
-<table class="table .table-bordered ">
+
+
+<table style="height: 1px;" class="table">
                     
-    <thead>
       <tr>
     {{-- <td>Id</td> --}}
     {{-- <th>Course Id</th> --}}
@@ -91,20 +72,15 @@
     <th>Semester</td>
   
     </tr>
-    </thead>
+  
 
 
     {{-- @foreach(array_merge($courses) as $course) --}}
    
 
 @foreach ($registration as $reg)
-
-
-<tbody>
     
-
 <tr>
-
 {{-- <td><input type="checkbox" name="course[]" value="{{$course['id']}} {{$course['course_code']}}"></td> --}}
 
 {{-- <th scope="row">1</th> --}} {{-- <td>{{ $course-> id }}</td> --}}
@@ -122,22 +98,16 @@
 
 
 
-</tbody>
-
-
 </table>
-<h4> HOD Signature</h4>
-______________________
-
 <button class="btn btn-primary" onclick="window.print()">PRINT</button>
-</form>
+</body>
+</html>
 
 
 
 
 
-
-@endsection
+{{-- @endsection --}}
 
 
 
