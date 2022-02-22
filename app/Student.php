@@ -40,7 +40,13 @@ class Student extends Authenticatable
     }
 
    
+    public function semester()
 
+    {
+        return $this->hasMany('App\Semester');
+
+        
+    }
     public function reghistory()
 
     {

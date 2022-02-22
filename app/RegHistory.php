@@ -15,4 +15,37 @@ class RegHistory extends Model
         return $this->belongsTo('App\Student');
         
     }
+
+    public  function studentregistration(){
+
+        return $this->hasMany('App\StudentRegistration', 'id', 'student_id'); 
+
+
+
+    }
+
+    public function reghistory(){
+
+
+        return $this->hasMany('App\RegHistory');
+
+    }
+
+    public function course(){
+
+
+        return $this->belongsTo('App\Course');
+
+    }
+
+
+    public function semester(){
+
+
+        return $this->belongsTo('App\Semester');
+
+    }
+
+
+
 }

@@ -14,7 +14,19 @@
     <button type="button" class="close" data-dismiss="alert">X</button>
     <strong> {{ $message }} </strong>
 </div> 
+
+   
 @endif
+
+
+@if( $message2  = Session::has('success2'))
+<div class="alert alert-danger" role="alert">
+    <button type="button" class="close" data-dismiss="alert">X</button>
+    {{Session::get('success2')}}
+    <strong> {{ $message2 }} </strong>
+</div>
+@endif
+
     </div>
 
 

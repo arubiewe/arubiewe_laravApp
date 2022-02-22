@@ -49,16 +49,17 @@
 
 
 <div class="container-fluid">
-  
+  <table>
+ <tr>
       <b>Matric No :</b> {{Auth::guard('students')->user()->matric_no }} <br/>
       <b>Surname :</b> {{Auth::guard('students')->user()->surname }} </p>
       <b>Other Names :</b> {{Auth::guard('students')->user()->other_names }}  </p>
       <p><b>Combination :</b> {{Auth::guard('students')->user()->combination }} </p>
       <p><b>Combination :</b> </p>
     
+ </tr>
 
-
-
+  </table>
 <br>
 
 
@@ -103,7 +104,7 @@
 
 
 </table>
-<button class="btn btn-primary" onclick="window.print()">PRINT</button>
+<button class="btn btn-primary" onclick="window.print()">Print</button>
 </body>
 </html>
 

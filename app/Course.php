@@ -31,6 +31,19 @@ class Course extends Model
         return $this->belongsTo('App\StudentRegistration', 'student_id', 'course_id');
     }
 
+    public function semester(){
+
+
+        return $this->belongsTo('App\Semester');
+
+    }
+
+    public function reghistory(){
+
+
+        return $this->belongsTo('App\RegHistory', 'student_id');
+
+    }
     
     
 

@@ -86,19 +86,12 @@ class StudentController extends Controller
             ['student_id' => $loggedUser, 'matric_no' => $loggedUserMatric, 'session' => $session, 'semester' => $semester]
         );
 
+      
     }
 
-    // $student_matricno = Auth('students')->user()->matric_no;
+    return redirect()->back()->with('success2', 'Course Registration is Successful');
 
-    //     //dd($student_matricno);
-    //     $semester = DB::SELECT("SELECT * FROM semesters WHERE id = 1"); 
-    //     $reg_history = new RegHistory();
-      
-    //     $reg_history->student_id = $user;
-    //     $reg_history->matric_no = $student_matricno;
-    //     $reg_history->session = $session;
-    //     $reg_history->semester = $semester;
-    //     $reg_history->save();
+
     
 
         }
@@ -107,7 +100,7 @@ class StudentController extends Controller
             $session = AcademicSession::where('id', 1)->value('session');
             
            // return 'You have registered already for the '. $session . ' Academic Session' ;
-            return redirect()->back()->with('errormsg', 'You have registered already for the' . $session .  ' Academic Session' );  
+            return redirect()->back()->with('errormsg', 'You have registered already for the ' . $session .  ' Academic Session' );  
         
         }
 
@@ -161,8 +154,20 @@ class StudentController extends Controller
 
     public function showreghistory($id)
     {
-        $student = RegHistroy::firstOrFind($id);
-        return view('');
+        $session = DB::SELECT("SELECT * FROM academic_sessions WHERE id = 1"); 
+        
+        
+       
+        $studentcourses = RegHistory::with('course', 'student' )->findOrFail($id);
+        $semesters = Semester::with('reghistory', 'student')->findOrFail($id);
+
+        //dd($semesters);
+       
+       // $courses = StudentRegistration::where('student_id', $studentcourses->student_id)->where('session', $studentcourses->session)->get();
+       $courses = StudentRegistration::where('student_id', Auth('students')->user()->id )->where('session', '=', 2020/2021 )->orWhere('semester_id', $semesters->id )->get();
+       //dd($courses);
+       
+        return view('student.registration_history', compact('studentcourses', 'session', 'courses', 'semesters'));
     }
 
 
@@ -173,7 +178,7 @@ class StudentController extends Controller
 
         //$reghistory = RegHistory::where( 'student_id',  Auth('students')->user()->id );
         $reghistory = RegHistory::where( 'student_id',  Auth('students')->user()->id )
-        ->with('student')->get();
+        ->with('student', 'course')->get();
 
         return view('student.view_registration', compact('reghistory'));
 

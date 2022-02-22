@@ -9,8 +9,8 @@ class StudentRegistration extends Model
     //
 protected $fillable  = ['student_id', 'course_id', 'session'];
 
-public function course(){
 
+public function course(){
 
     return $this->belongsTo('App\Course');
 
@@ -28,8 +28,21 @@ public function student(){
 
 }
 
+        public function reghistory(){
 
 
+            return $this->belongsTo('App\RegHistory');
+
+        }
+
+        public function semester(){
+
+
+            return $this->belongsTo('App\Semester');
+
+        }
+
+        
 
 
 
