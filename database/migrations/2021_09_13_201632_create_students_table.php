@@ -21,8 +21,19 @@ class CreateStudentsTable extends Migration
             $table->string('combination');
             $table->unsignedBigInteger('department_id');
             $table->unsignedBigInteger('department_minor_id');
-            $table->string('level');
-            $table->string('password');
+            $table->string('current_level')->nullable();
+            $table->string('gender')->nullable();
+            $table->date('dob')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('address')->nullable();
+            $table->string('nationality')->nullable();
+            $table->string('state')->nullable();
+            $table->string('lga')->nullable();
+            $table->string('blood_group')->nullable();
+            $table->string('kin_name')->nullable();
+            $table->string('password')->nullable();
+            $table->string('image_path')->nullable();
             $table->timestamps();
         });
     }

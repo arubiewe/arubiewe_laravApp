@@ -161,10 +161,10 @@ class StudentController extends Controller
         $studentcourses = RegHistory::with('course', 'student' )->findOrFail($id);
         $semesters = Semester::with('reghistory', 'student')->findOrFail($id);
 
-        //dd($semesters);
+        //dd($studentcourses->session);
        
        // $courses = StudentRegistration::where('student_id', $studentcourses->student_id)->where('session', $studentcourses->session)->get();
-       $courses = StudentRegistration::where('student_id', Auth('students')->user()->id )->where('session', '=', 2020/2021 )->orWhere('semester_id', $semesters->id )->get();
+       $courses = StudentRegistration::where('student_id', Auth('students')->user()->id )->where('session', $studentcourses->session)->orWhere('semester_id', $semesters->id )->get();
        //dd($courses);
        
         return view('student.registration_history', compact('studentcourses', 'session', 'courses', 'semesters'));

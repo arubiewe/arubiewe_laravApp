@@ -1,4 +1,5 @@
 @extends('layouts.student_master')
+
 @section('content')
 
 

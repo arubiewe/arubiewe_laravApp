@@ -11,6 +11,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Student extends Authenticatable 
 {
+    //protected $fillable  = ['surname'];
+    protected $guarded = [];
 
     
     public function course()
