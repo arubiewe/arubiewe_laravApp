@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use App\Models\User;
 use App\Models\Student;
-use App\{ AcademicSession};
+use App\{AcademicSession};
 use Validator;
 use Session;
 use DB;
@@ -52,6 +52,7 @@ class CustomAuthController extends Controller
            
             //dd($user_id);
             $user = Auth::guard('students');
+            //$profiles = Student::find($user);
             $dashbaordSession = DB::SELECT("SELECT * FROM academic_sessions WHERE id = 1"); 
 
             if (Auth::guard('students')->check()) {

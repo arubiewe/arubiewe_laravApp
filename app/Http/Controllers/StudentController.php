@@ -5,14 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\{ActiveCourse, Course };
 use App\{GenCourse , GeneralCourse, AcademicSession, StudentRegistration};
-Use App\{RegHistory, Semester};
+Use App\{RegHistory, Semester, Student};
 use DB;
 
-use App\Models\Student;
+//use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 //use App\Models\GeneralCourse;
-use View;
+//use View;
 use Validator;
 use Session;
 
@@ -27,13 +27,97 @@ class StudentController extends Controller
 
     }
 
+    
+
     public function dashboard(){
         
-        $dashbaordSession = DB::SELECT("SELECT * FROM academic_sessions WHERE id = 1"); 
-        return View::make("student/dashboard", compact('dashbaordSession'));
+        //$dashbaordSession = DB::SELECT("SELECT * FROM academic_sessions WHERE id = 1"); 
+        $dashbaordSession = AcademicSession::where('id', 1 )->get();
+        
+       $sessionDashboard = AcademicSession::where('id', 1 )->value('session');
+       //dd($dashbaordSession, $sessionDashboard);
+        //return View::make("student/dashboard", compact('dashbaordSession'));
+        return view('student/dashboard', compact('dashbaordSession', 'sessionDashboard'));
+
        // return view('student.dashboard');
 
 }
+
+public function profile($id){
+
+    $profiles = Student::find($id);
+    //dd($profiles);
+   
+    return view('student.profile' , compact('profiles', 'id'));
+    //return view('student.registration_history', compact('studentcourses', 'session', 'courses', 'semesters'));
+
+    // return view('student.profile_update');
+
+ }
+
+ public function update($id){
+
+    
+    $student = Student::find($id);
+    //dd($profiles);
+   
+    return view('student.profile' , compact('profiles', 'id'));
+    //return view('student.registration_history', compact('studentcourses', 'session', 'courses', 'semesters'));
+
+    // return view('student.profile_update');
+
+ }
+
+ public function profileupdate(Request $request, $id){
+    
+    
+    $this->validate($request, [
+
+        'surname' => 'required',
+        'other_names'  => 'required',
+        'matric_no'  => 'required',
+        'school'  => 'required',
+        'combination'  => 'required',
+        'level'  => 'required',
+        'gender'  => 'required',
+        'dob'  => 'required',
+        'email'  => 'required',
+        'phone'  => 'required',
+        'address'  => 'required',
+        'nationality'  => 'required',
+        'state'  => 'required',
+        'lga'  => 'required',
+        'bloodgrp'  => 'required',
+        'kinname'  => 'required',
+        'kin_no'  => 'required',
+
+
+    ]);
+    $student = Student::find($id);
+    $student->surname = $request->get('surname');
+    $student->other_names = $request->get('other_names');
+    $student->matric_no = $request->get('matric_no');
+    $student->school = $request->get('school');
+    $student->combination = $request->get('combination');
+    $student->current_level = $request->get('level');
+    $student->gender = $request->get('gender');
+    $student->dob = $request->get('dob');
+    $student->email = $request->get('email');
+    $student->phone = $request->get('phone');
+    $student->address = $request->get('address');
+    $student->nationality = $request->get('nationality');
+    $student->state = $request->get('state');
+    $student->lga = $request->get('lga');
+    $student->blood_group = $request->get('bloodgrp');
+    $student->kin_name = $request->get('kinname');
+    $student->kin_phone = $request->get('kin_no');
+    $student->save();
+    //dd($request->all());
+    //return redirect()->back()->with('message2', 'Course Registration is Successful');
+    return redirect('student/dashboard')->with('message2', 'Your Profile is Now Updated !');
+ }
+
+
     
 
     
@@ -63,7 +147,8 @@ class StudentController extends Controller
         $user = StudentRegistration::where('student_id', '=', $loggedUser)->first();
         
         $semester = Semester::where('id', 1)->value('semester_name');
-     //dd($semester);
+        $semesterId = Semester::where('id', 1 )->value('id');
+     //dd($semesterId);
       
         $choose_course = $request->input('course');
         if ($user === null) {
@@ -73,17 +158,17 @@ class StudentController extends Controller
         
      
         $registrations = new StudentRegistration();
-        $data = ['student_id' => $loggedUser, 'course_id' => $choose];
+        $data = ['student_id' => $loggedUser, 'course_id' => $choose, 'session' => $session, 'semester_id' => $semesterId];
         $registrations->updateOrCreate(
             $data, 
-            ['student_id' => $loggedUser, 'course_id' => $choose, 'session' => $session]
+            ['student_id' => $loggedUser, 'course_id' => $choose, 'session' => $session, 'semester_id' => $semesterId ]
         );
         
         $reg_history = new RegHistory();
         $data = ['student_id' => $loggedUser, 'matric_no' => $loggedUserMatric];
         $reg_history->updateOrCreate(
             $data, 
-            ['student_id' => $loggedUser, 'matric_no' => $loggedUserMatric, 'session' => $session, 'semester' => $semester]
+            ['student_id' => $loggedUser, 'matric_no' => $loggedUserMatric, 'session' => $session, 'semester' => $semester, 'semester_id' => $semesterId]
         );
 
       
@@ -115,7 +200,8 @@ class StudentController extends Controller
        // $courses = Course::where(['department_id' => $department_id, 'department_id'=> 5 ] )->get();//orWhere ('department_id', $department_minor_id)->get();
         //dd($sessions);
        // $courses = Course::where([['department_id', '=', 1]])->where('department_id', 5)->orWhere('department_id', $department_minor_id)->get();
-       $session = DB::SELECT("SELECT * FROM academic_sessions WHERE id = 1"); 
+       //$session = DB::SELECT("SELECT * FROM academic_sessions WHERE id = 1"); 
+       $session = AcademicSession::where('id', 1 );
        //$session = AcademicSession::where('id', 1)->value('session');
         $courses = Course::where('department_id', '=', 5)
                         ->orWhere('department_id', '=', $department_id)
@@ -128,7 +214,8 @@ class StudentController extends Controller
        // $courses = array_merge($general_courses , $dptcourses);        
         //dd($department_minor_id);
        // return 'my courses';
-         return View::make("student/course_registration", compact('courses', 'session'));
+         //return View::make("student/course_registration", compact('courses', 'session'));
+         return view('student/course_registration', compact('courses', 'session'));
          //return View::make("student/course_registration", compact('session'));
     }
     
@@ -140,7 +227,10 @@ class StudentController extends Controller
 
 
 
-        $session = DB::SELECT("SELECT * FROM academic_sessions WHERE id = 1"); 
+        //$session = DB::SELECT("SELECT * FROM academic_sessions WHERE id = 1"); 
+        //dd($session);
+       $session = AcademicSession::where('id', 1 );
+
        $registration = StudentRegistration::where( 'student_id',  Auth('students')->user()->id )
                                             ->with('student', 'course')->get();
 
@@ -148,15 +238,16 @@ class StudentController extends Controller
                        
         //dd($registration);
 
-        return View::make("student/course_form", compact('registration', 'session'));
+       // return View::make("student/course_form", compact('registration', 'session'));
+        return view('student/course_form', compact('registration', 'session'));
 
     }
 
     public function showreghistory($id)
     {
-        $session = DB::SELECT("SELECT * FROM academic_sessions WHERE id = 1"); 
-        
-        
+        //---- $session = DB::SELECT("SELECT * FROM academic_sessions WHERE id = 1"); 
+        //$session = AcademicSession::where('id', 1 )->value('session');
+        $session = AcademicSession::where('id', 1 );
        
         $studentcourses = RegHistory::with('course', 'student' )->findOrFail($id);
         $semesters = Semester::with('reghistory', 'student')->findOrFail($id);

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class StudentRegistration extends Model
 {
     //
-protected $fillable  = ['student_id', 'course_id', 'session'];
+protected $fillable  = ['student_id', 'course_id', 'session', 'semester_id'];
 
 
 public function course(){

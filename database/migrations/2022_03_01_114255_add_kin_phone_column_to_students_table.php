@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddSemesterIdColumnToRegHistoriesTable extends Migration
+class AddKinPhoneColumnToStudentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddSemesterIdColumnToRegHistoriesTable extends Migration
      */
     public function up()
     {
-        Schema::table('reg_histories', function (Blueprint $table) {
-            $table->unsignedBigInteger('semester_id')->after('semester')->nullable();
+        Schema::table('students', function (Blueprint $table) {
+            $table->string('kin_phone')->after('kin_name')->nullable();
         });
     }
 
@@ -25,7 +25,7 @@ class AddSemesterIdColumnToRegHistoriesTable extends Migration
      */
     public function down()
     {
-        Schema::table('reg_histories', function (Blueprint $table) {
+        Schema::table('students', function (Blueprint $table) {
             //
         });
     }

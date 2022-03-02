@@ -63,13 +63,15 @@ Route::get('student/hash', 'CustomAuthController@hash');
 
 Route::get('student/dashboard', 'StudentController@dashboard');
 Route::get('student/dashboard/show', 'StudentController@show');
+
 Route::get('student/course_registration', 'StudentController@studentcourse');
 Route::post('student/course_registration', 'StudentController@store');
 Route::get('student/course_form', 'StudentController@studentcourseregistration');
 Route::get('student/view_registration', 'StudentController@viewregistration');
 //Route::get('student/show/{id}','StudentController@showreghistory')->name('student.show');
 Route::get('student/registration_history/{id}','StudentController@showreghistory')->name('student.registration_history');
-
+Route::get('student/profile/{id}', 'StudentController@profile')->name('student.profile');
+Route::patch('student/profile/{id}', 'StudentController@profileupdate');
  
 
 

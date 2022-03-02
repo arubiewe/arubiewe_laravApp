@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class RegHistory extends Model
 {
-    protected $fillable  = ['student_id', 'matric_no', 'session', 'semester'];
+    protected $fillable  = ['student_id', 'matric_no', 'session', 'semester', 'semester_id'];
 
     public function student()
 

@@ -5,6 +5,15 @@
 <div class="container-fluid">
 <h5> Welcome to Your Dashboard Area!</h5>
 
+@if ($message =  Session::get('message2'))
+<div class="alert alert-danger alert-block">
+    <button type="button" class="close" data-dismiss="alert">X</button>
+    <strong> {{ $message }} </strong>
+</div> 
+
+   
+@endif
+
 {{--{{ dd(Auth::guard('students')->student()->id;)}}--}}
 
 
