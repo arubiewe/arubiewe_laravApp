@@ -100,7 +100,13 @@ public function profile($id){
 
  public function profileupdate(Request $request, $id){
     
-    
+    //$input = $request->all();
+    $input = $request->get('image');
+    if ($request->get('image') == null){ 
+
+        $input['image_path'] = 'AVATAR.JPG';
+    }
+    //dd($request->get('image'));
     $this->validate($request, [
 
         'surname' => 'required',
@@ -119,18 +125,15 @@ public function profile($id){
         'lga'  => 'required',
         'bloodgrp'  => 'required',
         'kinname'  => 'required',
-        'kin_no'  => 'required',
-        'image'  => 'required|mimes:jpg,JPG,jpeg,PNG,png' ,
+        'kin_no'  => 'required'
+        // 'image'  => 'required|mimes:jpg,JPG,jpeg,PNG,png'
     ]);
     
     
-    $student = Student::find($id);
-
-    //$input = $request->all();
-    $input = $request->get('image');
-    //dd($request->all());
-    
    
+
+    
+    
    
     if ($request->hasFile('image')){
 
@@ -140,7 +143,11 @@ public function profile($id){
         $path = $request->file('image')->storeAs($destination_path,$image_name);
         $input['image_path'] = $image_name;
     }
+
     
+    //dd($input);
+   
+    $student = Student::find($id);
     $student->surname = $request->get('surname');
     $student->other_names = $request->get('other_names');
     $student->matric_no = $request->get('matric_no');
