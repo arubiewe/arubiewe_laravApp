@@ -56,32 +56,33 @@ class AdminController extends Controller
     
     public function store(Request $request){
         
-        // $request->validate([
-            //     'coursecode' =>'required',
-            //     'title' => 'required',
-            //     'isgeneral' => 'required',
-            //     'semester' => 'required',
-            // ]);
-            
-            $selectedDept = $request->get('optiondept');
+        $selectedDept = $request->get('optiondept');
             
             //$selectedCurriculum = $request->get('multiInput[0][isoldcurriculum]');
             //dd($selectedCurriculum);
             //dd($request['multiInput']);
+
             
-            foreach($request['multiInput'] as $request){  
+            foreach($request['multiInput'] as $data){ 
+                
+              //dd($request['multiInput']);
+            //dd($data['isoldcurriculum']);
                 
                 $upload_course = new Course();
-                $upload_course->course_code = $request['coursecode'];
-                $upload_course->course_title = $request['title'];
-                $upload_course->course_unit = $request['unit'];
-                $upload_course->course_status = $request['status'];
-                $upload_course->semester = $request['semester'];
-                $upload_course->course_level = $request['level'];
+                $upload_course->course_code = $data['coursecode'];
+                $upload_course->course_title = $data['title'];
+                $upload_course->course_unit = $data['unit'];
+                $upload_course->course_status = $data['status'];
+                $upload_course->semester = $data['semester'];
                 $upload_course->department_id = $selectedDept;
-                $upload_course->is_general = $request['isgeneral'];
-                $upload_course->is_oldcurriculum = $request['isoldcurriculum'];
+                $upload_course->is_general = $data['isgeneral'];
                 
+                $upload_course->is_oldcurriculum =   "old" ??$data['isoldcurriculum'];
+               
+              
+                $upload_course->currid = $data['isoldcurrid'];
+                $upload_course->course_level = $data['level'];
+               
                 
                 $upload_course->save();
                 

@@ -38,7 +38,8 @@ class CoursesImport implements ToModel, WithHeadingRow
                'course_level'  => $row['course_level'],
                'department_id' => (int) $this->departmentId,
                'is_general'    => $row['isgeneral'],
-               'is_oldcurriculum'    => $row['is_oldcurriculum'], 
+               'is_oldcurriculum'    => $row['is_oldcurriculum'],
+               'currid'    => $row['currid'],  
               
                
                

@@ -86,6 +86,11 @@
                                         <input type="password" name="password" class="form-control" placeholder="Password" value="" >
                                         {{-- <span class="text-danger"> @error('password'){{$message}}@enderror </span> --}}
                                     </div>
+
+                                    <div class="form-group">
+                                        <input type="password" name="pin" class="form-control" placeholder="Enter User Access Code" value="" >
+                                        {{-- <span class="text-danger"> @error('password'){{$message}}@enderror </span> --}}
+                                    </div>
                                     <input type="submit" name="login" class="btn login-form__btn submit w-100" value="Login"  />
                                 </form>
                                 <p class="mt-5 login-form__footer">Dont have account? <a href="page-register.html" class="text-primary">Sign Up</a> now</p>

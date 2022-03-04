@@ -44,6 +44,20 @@ class Course extends Model
         return $this->belongsTo('App\RegHistory', 'student_id');
 
     }
+
+    public function curriculum(){
+
+
+        return $this->belongsTo('App\Curriculum');
+
+    }
+
+    public function course(){
+
+
+        return $this->belongsTo('App\Course', 'currid');
+
+    }
     
     
 

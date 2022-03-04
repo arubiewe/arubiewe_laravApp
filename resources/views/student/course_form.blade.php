@@ -42,6 +42,10 @@
 </div>
 
 <div class="container">
+
+ 
+      
+  <img src="{{ asset ('storage/images/students/'. Auth::guard('students')->user()->image_path ) }}" alt="" width="100px" height="100px" align="left">   </p>
   <img src="{{ asset ('images/logo.png') }}" alt="" width="100px" height="100px" align="right">
 </div>
 
@@ -55,9 +59,14 @@
       <b>Surname :</b> {{Auth::guard('students')->user()->surname }} </p>
       <b>Other Names :</b> {{Auth::guard('students')->user()->other_names }}  </p>
       <p><b>Combination :</b> {{Auth::guard('students')->user()->combination }} </p>
-      <p><b>Combination :</b> </p>
+      @foreach ($registration->take(1) as $reg)
+      
+      <p><b>Accredited:</b> {{$reg->reg_by}}  </p>
+     
     
  </tr>
+
+ @endforeach
 
   </table>
 <br>
@@ -71,10 +80,13 @@
    
     <th>Course Code</th>
     <th>Course Title</th>
-    <th>Unit</td>
-    <th>Status</td>
+    <th>Unit</th>
+    <th>Status</th>
 
-    <th>Semester</td>
+    <th>Semester</th>
+    <th>Curriculum</th>
+    
+    
   
     </tr>
   
@@ -95,6 +107,11 @@
 <td>{{ $reg->course->course_unit }}</td>
 <td>{{ $reg->course->course_status }}</td>
 <td> {{ $reg->course->semester }}</td>
+<td> {{$reg->course->is_oldcurriculum}}</td>
+    
+
+{{-- <td> {{$reg->curriculum->name}}</td> --}}
+
 {{-- <td>{{ $reg['course_title'] }}</td>
 <td>{{ $reg['semester'] }}</td> --}}
 

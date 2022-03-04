@@ -32,7 +32,7 @@
   <div class="jumbotron alert-success" align="center">
     
         <h3>Welcome Back ! {{Auth::guard('students')->user()->surname }}  ({{Auth::guard('students')->user()->matric_no }} )</h3>
-        <h4> DEPT:  {{Auth::guard('students')->user()->combination }}
+        <h4> DEPT:  {{Auth::guard('students')->user()->combination }}</h4>
           
           @foreach($dashbaordSession as $dsession)
           <h5 style="color:blue"> {{ $dsession->session }} Academic Session</h5>
@@ -40,7 +40,17 @@
             {{-- $session = StudentSession::where('id', 1)->value('session');  --}}
         {{-- $uss = Auth('students')->user()->matric_no; --}}
         @endforeach
-   
+
+        @foreach($vendors as $ven)
+       
+        
+      
+         @endforeach
+        
+      {{-- <p>  {{ $vendors->get("vendors") }} </p> --}}
+    {{-- {{ $vendors->vendor_name }} --}}
+    </div>
+  
 
 
 {{-- <script>window.location = "/student";    </script>  --}}

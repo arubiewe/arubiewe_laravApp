@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\{ActiveCourse, Course };
 use App\{GenCourse , GeneralCourse, AcademicSession, StudentRegistration};
-Use App\{RegHistory, Semester, Student};
+Use App\{RegHistory, Semester, Student, Vendor};
 use DB;
 
 //use App\Models\Student;
@@ -16,9 +16,15 @@ use App\Models\User;
 use Validator;
 use Session;
 
+
+
+    //public $departmentMinorId; 
+
 class StudentController extends Controller
 {
-    //
+
+    
+    
     public function index(){
 
 
@@ -30,14 +36,38 @@ class StudentController extends Controller
     
 
     public function dashboard(){
+
+       
+
+        $vendors = Vendor::where('pin', Session::get('log'))->get();
+
+        foreach($vendors as $ven){
+
+            $ven->vendor_name;
+
+        Session::put('ven_name', $ven->vendor_name);
+        Session::get('ven_name');
+        }
+
+
+       // dd(Session::get('log'));
         
+        //dd(Session::get('ven_name'));
+        //dd($userpin);
+        //dd($dept);
         //$dashbaordSession = DB::SELECT("SELECT * FROM academic_sessions WHERE id = 1"); 
         $dashbaordSession = AcademicSession::where('id', 1 )->get();
         
        $sessionDashboard = AcademicSession::where('id', 1 )->value('session');
+      
+       //$userpin = $vendors;
+       //dd($vendors);
+       //dd($userpin);
+       //dd($this->userpin);
+      
        //dd($dashbaordSession, $sessionDashboard);
         //return View::make("student/dashboard", compact('dashbaordSession'));
-        return view('student/dashboard', compact('dashbaordSession', 'sessionDashboard'));
+        return view('student/dashboard', compact('dashbaordSession', 'sessionDashboard', 'vendors'));
 
        // return view('student.dashboard');
 
@@ -90,10 +120,27 @@ public function profile($id){
         'bloodgrp'  => 'required',
         'kinname'  => 'required',
         'kin_no'  => 'required',
-
-
+        'image'  => 'required|mimes:jpg,JPG,jpeg,PNG,png' ,
     ]);
+    
+    
     $student = Student::find($id);
+
+    //$input = $request->all();
+    $input = $request->get('image');
+    //dd($request->all());
+    
+   
+   
+    if ($request->hasFile('image')){
+
+        $destination_path = 'public/images/students';
+        $image = $request->file('image');
+        $image_name = $image->getClientOriginalName();
+        $path = $request->file('image')->storeAs($destination_path,$image_name);
+        $input['image_path'] = $image_name;
+    }
+    
     $student->surname = $request->get('surname');
     $student->other_names = $request->get('other_names');
     $student->matric_no = $request->get('matric_no');
@@ -111,11 +158,16 @@ public function profile($id){
     $student->blood_group = $request->get('bloodgrp');
     $student->kin_name = $request->get('kinname');
     $student->kin_phone = $request->get('kin_no');
+    $student->image_path = $input['image_path'];
+    
     $student->save();
+    
     //dd($request->all());
     //return redirect()->back()->with('message2', 'Course Registration is Successful');
     return redirect('student/dashboard')->with('message2', 'Your Profile is Now Updated !');
  }
+
+
 
 
     
@@ -140,7 +192,22 @@ public function profile($id){
     }
 
 
-    public function store(Request $request){   
+    public function store(Request $request){  
+
+        $vendors = Vendor::where('pin', Session::get('log'))->get();
+        
+        foreach($vendors as $venn){
+
+            $venn->vendor_name;
+
+        Session::put('ven_name', $venn->vendor_name);
+        Session::get('ven_name');
+        }
+
+        $regBy =  Session::get('ven_name');
+
+        //dd($regBy);
+        //dd(Session::get('ven_name'));
       
         $loggedUser = Auth('students')->user()->id;
         $loggedUserMatric = Auth('students')->user()->matric_no;
@@ -156,12 +223,12 @@ public function profile($id){
         
         $session = AcademicSession::where('id', 1)->value('session');
         
-     
+        
         $registrations = new StudentRegistration();
         $data = ['student_id' => $loggedUser, 'course_id' => $choose, 'session' => $session, 'semester_id' => $semesterId];
         $registrations->updateOrCreate(
             $data, 
-            ['student_id' => $loggedUser, 'course_id' => $choose, 'session' => $session, 'semester_id' => $semesterId ]
+            ['student_id' => $loggedUser, 'course_id' => $choose, 'session' => $session, 'semester_id' => $semesterId, 'reg_by' => $regBy]
         );
         
         $reg_history = new RegHistory();
@@ -225,12 +292,12 @@ public function profile($id){
 
         //$student_id = Auth('students')->user()->id;
 
-
-
+        $imageOwner = Student::where('id', Auth('students')->user()->id )->get();
+        //dd($imageOwner);
         //$session = DB::SELECT("SELECT * FROM academic_sessions WHERE id = 1"); 
         //dd($session);
        $session = AcademicSession::where('id', 1 );
-
+       
        $registration = StudentRegistration::where( 'student_id',  Auth('students')->user()->id )
                                             ->with('student', 'course')->get();
 

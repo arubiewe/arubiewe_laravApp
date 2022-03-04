@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddIsOldcurriculumColumnToCoursesTable extends Migration
+class AddCurridColumnToCoursesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddIsOldcurriculumColumnToCoursesTable extends Migration
     public function up()
     {
         Schema::table('courses', function (Blueprint $table) {
-            $table->string('is_oldcurriculum')->after('is_general')->nullable(); // 0 represents its not a general course
+            $table->unsignedBigInteger('currid')->after('is_oldcurriculum')->nullable();
         });
     }
 

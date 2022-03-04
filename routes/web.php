@@ -79,10 +79,15 @@ Route::patch('student/profile/{id}', 'StudentController@profileupdate');
 // Route::get('student/dashboard/studentcourse', 'StudentController@studentcourse');
 
 Route::get('hash', function(){
- dd(Hash::make('ARUBIEWE'));
+ dd(Hash::make("ARUBIEWE"));
 
 
 });
+Route::get('pin', function(){
+    dd(Hash::make("111"));
+   
+   
+   });
 
 // Route::post('/student/checklogin', 'StudentController@checklogin');
 // Route::get('student/successlogin', 'StudentController@successlogin');

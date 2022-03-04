@@ -23,6 +23,7 @@
         </div>
         
         <div class="container">
+          <img src="{{ asset ('storage/images/students/'. Auth::guard('students')->user()->image_path ) }}" alt="" width="100px" height="100px" align="left">   </p>
           <img src="{{ asset ('images/logo.png') }}" alt="" width="100px" height="100px" align="right">
         </div>
         

@@ -15,7 +15,7 @@
           <h2>Profile Update</h2>
         </div>
 
-    <form method="POST" action="{{action('StudentController@profile', $id)}}">
+    <form method="POST" action="{{action('StudentController@profile', $id)}}" enctype="multipart/form-data">
     {{@csrf_field()}}
     <input type="hidden" name="_method" value="PATCH" />
 
@@ -211,7 +211,7 @@
                  <div class="row">  
                 <div class="form-group alert alert-danger">
                     <label for="Passport">Upload Passport</label>
-                    <input type="file" class="form-control-file" id="PassportUpload">
+                    <input type="file" name="image"  class="form-control-file" id="PassportUpload">
                 
                 </div>
                  </div>

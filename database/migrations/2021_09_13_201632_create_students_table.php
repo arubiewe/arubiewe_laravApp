@@ -33,7 +33,8 @@ class CreateStudentsTable extends Migration
             $table->string('blood_group')->nullable();
             $table->string('kin_name')->nullable();
             $table->string('password')->nullable();
-            $table->string('image_path')->nullable();
+            $table->rememberToken();
+            $table->string('image_path')->default('AVATAR.JPG');
             $table->timestamps();
         });
     }

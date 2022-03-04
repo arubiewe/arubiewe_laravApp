@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+
 use App\Models\User;
 use App\Models\Student;
-use App\{AcademicSession};
+//use App\Models\Vendor;
+use App\{AcademicSession, Vendor};
 use Validator;
 use Session;
 use DB;
@@ -20,6 +22,7 @@ use View;
 
 class CustomAuthController extends Controller
 {
+    public $pin;
     public function login(){
 
         return view ("student.login");
@@ -33,47 +36,102 @@ class CustomAuthController extends Controller
 
             'matricno' =>'required',
             'password' => 'required',
+            'pin' => 'required',
         ]);
+        
+        //dd($request->get('pin'));
+        
+
+        
+       
 
 
         $user_data = array(
 
             'matric_no'  => $request->get('matricno'),
-            'password'  => strtoupper($request->get('password')),     
+            'password'  => strtoupper($request->get('password')),
+           
         );
-       // dd($user_data);
+
+        $user_data2 = array(
+
+            'pin'  => $request->get('pin'),    
+
+            
+        );
+
+        $vendors = Vendor::where('pin', $user_data2 )->value('pin');
         
+        $dept  = Vendor::where('pin', $user_data2 )->value('pin');
+
+        //Session::set('log', $dept);
+        //dd(config('global.logged'));
+        Session::put('log', $dept);
+        Session::get('log');
+        //dd(Session::get('log'));
+       
+        if ($vendors != $request->get('pin')){
+
+
+            return back()->with('error', 'Invalid Pin Credentials ');
+
+
+        }
+        else{
+
+           
+
+
+
         
-        if(Auth::guard('students')->attempt($user_data))
+
+
+       
+       //dd($user_data2);
+        
+       
+         if(Auth::guard('students')->attempt($user_data) ) 
         {
             //return redirect ('student/dashboard');
-            //$user_id= Auth::guard('students');
+            $user_id= Auth::guard('students');
+            $ven_id= Auth::guard('vendors');
+
            
            
-            //dd($user_id);
+           
             $user = Auth::guard('students');
+            //$vendors = Auth::guard('vendors');
             //$profiles = Student::find($user);
+            //$userpin = Auth::id();
+            //dd($vendors);
+           
             $dashbaordSession = DB::SELECT("SELECT * FROM academic_sessions WHERE id = 1"); 
+            $vendors = Vendor::where('pin', $request->get('pin'))->get();
+            //$dep = $request->pin;
+            //$userpin = $vendors;
+            ///dd($vendors);
 
             if (Auth::guard('students')->check()) {
 
-
-               
+               //dd(Auth::guard('vendors'));
  
                 // Thecheck user is logged in...
-                //dd($user);    
+                //dd($user);  
+                return View::make("student/dashboard", compact('dashbaordSession', 'vendors'));  
             }
            
             //return view ('student/dashboard');
             
-            return View::make("student/dashboard", compact('dashbaordSession'));
+           
             
-        }
+        
+    }
         else {
 
             return back()->with('error', 'Invalid Login Credentials ');
 
         }
+    }
 
     }
 

@@ -53,6 +53,7 @@
                 <th>Unit</td>
                 <th>Status</td>
                 <th>Semester</td>
+                <th> Curriculum </th>
               
                 </tr>
                 </thead>
@@ -78,6 +79,7 @@
             <td>{{ $course['course_unit'] }}</td>
             <td>{{ $course['course_status'] }}</td>
             <td>{{ $course['semester'] }}</td>
+            <td>{{ $course['is_oldcurriculum'] }}</td>
             
         </tr>
             @endforeach
