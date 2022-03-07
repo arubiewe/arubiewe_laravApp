@@ -125,8 +125,8 @@ public function profile($id){
         'lga'  => 'required',
         'bloodgrp'  => 'required',
         'kinname'  => 'required',
-        'kin_no'  => 'required'
-        // 'image'  => 'required|mimes:jpg,JPG,jpeg,PNG,png'
+        'kin_no'  => 'required',
+        // 'image'  => 'required|image|mimes:jpg,JPG,jpeg,PNG,png|max:2048'
     ]);
     
     

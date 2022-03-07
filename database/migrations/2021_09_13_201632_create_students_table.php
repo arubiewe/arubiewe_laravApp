@@ -34,7 +34,7 @@ class CreateStudentsTable extends Migration
             $table->string('kin_name')->nullable();
             $table->string('password')->nullable();
             $table->rememberToken();
-            $table->string('image_path')->default('AVATAR.JPG');
+            $table->string('image_path')->default('AVATAR.jpg');
             $table->timestamps();
         });
     }

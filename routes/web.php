@@ -19,7 +19,7 @@ use App\Http\Controllers\AdminController;
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('student/login');
 });
 
 Route::get('/index', 'CourseController@index');

@@ -76,10 +76,7 @@ class AdminController extends Controller
                 $upload_course->semester = $data['semester'];
                 $upload_course->department_id = $selectedDept;
                 $upload_course->is_general = $data['isgeneral'];
-                
-                $upload_course->is_oldcurriculum =   "old" ??$data['isoldcurriculum'];
-               
-              
+                $upload_course->is_oldcurriculum = $data['isoldcurriculum'];
                 $upload_course->currid = $data['isoldcurrid'];
                 $upload_course->course_level = $data['level'];
                

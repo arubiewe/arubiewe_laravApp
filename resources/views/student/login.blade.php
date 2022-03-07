@@ -1,122 +1,138 @@
 {{-- @extends('layouts.student_master')
 @section('content') --}}
-
 <!DOCTYPE html>
-<html class="h-100" lang="en">
+<html lang="en">
+    <head>
+        
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <meta name="csrf-token" content="ss30QKNE0BLAmqulbrdh4MFsNEUu4Rk9B0TeSaQp"> -->
+        <title>AOCOED | Student Login</title>
+        
+        
+        {{-- <link rel="icon" href="https://cointario.com/online/storage/app/public/photos/jba6gyfaviconin.png1640563511" type="image/png"/> --}}
+                   
+            <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+            <!-- Icons -->
+            <link href="{{ asset('css/materialdesignicons.min.css') }}" rel="stylesheet" type="text/css">
+        
+            <link rel="stylesheet" href="{{ asset('css/line.css') }}">
+            
+            <!-- Main Css -->
+            <link href="{{ asset ('css/styles.css') }}" rel="stylesheet" type="text/css">
+            <link href="{{ asset('css/colors/default.css') }}" rel="stylesheet">
+        
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title> AOCOED - Student|Login </title>
-    <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
-    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"> -->
-    <link href="{{ asset ('css/style.css') }}" rel="stylesheet">
-    
-</head>
+    </head>
+    <body class="h-100 bg-soft-primary">
+       <section class="auth">
+	   
+        <div class="container">
+		
+            <div class="pb-4 row justify-content-center">
 
-<body class="h-100">
-    
-    <!--*******************
-        Preloader start
-    ********************-->
-    {{-- <div id="preloader">
-        <div class="loader">
-            <svg class="circular" viewBox="25 25 50 50">
-                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
-            </svg>
-        </div>
-    </div> --}}
-    <!--*******************
-        Preloader end
-    ********************-->
-
-    
-
-
-
-    <div class="login-form-bg h-100">
-        <div class="container h-100">
-            <div class="row justify-content-center h-100">
-                <div class="col-xl-6">
-                    <div class="form-input-content">
-                        <div class="card login-form mb-0">
-                            <div class="card-body pt-5">
-                                <a class="text-center" href="index.html"> <h4>Student Login Area! Ooops </h4></a>
-                                <br />
-
-                               {{-- @if(isset(Auth::student->matric_no))
-                               <script>window.location = "/student/dashboard";    </script>
-                               @endif --}}
-
-
-                                @if ($message = Session::get('error'))
-
-
+                <div class="img-responsive center-block">
+                    <a href="/"><img src="{{asset ('images/logo.png') }}" alt="" width="100px" height="90px" class="img-responsive mx-auto d-block"></a>
+                    <h2><center>AOCOED STUDENT PORTAL</center></h2>
+                     <div class="bg-white shadow card login-page roundedd border-1 ">
+                        <div class="card-body">
+                            <h4 class="text-center card-title">Student Login</h4>
+                            @if ($message = Session::get('error'))
                                 <div class="alert alert-danger alert-block">
                                     <button type="button" class="close" data-dismiss="alert">x</button>
                                     <strong>  {{ $message }}  </strong>
-                                
                                 </div>
                                 @endif 
-
                                 @if (count($errors) > 0 )
                                     <div class="alert alert-danger">
                                         <ul>
-                                        @foreach($errors->all() as $error )
+                                    @foreach($errors->all() as $error )
 
                                         <li> {{ $error }} </li>
 
-                                        @endforeach
-
-
+                                     @endforeach
                                     </div>
                                     @endif
 
-                                <form method="POST" action="{{ url('student/dashboard')}}" class="mt-5 mb-5 login-input">
-                                    @csrf
-                                    {{-- {{csrf_field()}} --}}
-                                    <div class="form-group">
-                                        <input type="text" name="matricno" class="form-control" placeholder="Matric No" value="{{old('name')}}" >
-                                    {{-- <span class="text-danger"> @error('name'){{$message}}@enderror </span>--}}
-                                    
+                            <form method="POST" action="{{ url('student/dashboard')}}"  class="mt-4 login-form">
+                                @csrf
+                                 {{-- <input type="hidden" name="_token" value="ss30QKNE0BLAmqulbrdh4MFsNEUu4Rk9B0TeSaQp">                                <div class="row"> --}}
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label>Your Matric No <span class="text-danger">*</span></label>
+                                            <div class="position-relative">
+                                                <i data-feather="user" class="fea icon-sm icons"></i>
+                                                <input type="text" class="pl-5 form-control" name ="matricno" value="{{old('name')}}" id="matricno" placeholder="AOC/20/ or 00/00000" style='text-transform:uppercase' maxlength="19" required />
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <input type="password" name="password" class="form-control" placeholder="Password" value="" >
-                                        {{-- <span class="text-danger"> @error('password'){{$message}}@enderror </span> --}}
-                                    </div>
+                                    <!--end col-->
 
-                                    <div class="form-group">
-                                        <input type="password" name="pin" class="form-control" placeholder="Enter User Access Code" value="" >
-                                        {{-- <span class="text-danger"> @error('password'){{$message}}@enderror </span> --}}
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label>Password <span class="text-danger">* </span></label>
+                                            <div class="position-relative">
+                                                <i data-feather="key" class="fea icon-sm icons"></i>
+                                                <input type="password" class="pl-5 form-control" name="password" id="password"  placeholder="Enter your Password" required>
+												<!-- <small class="mr-2 text-dark">Always your surname -->
+                                                <!-- </small> -->
+                                            
+											</div>
+                                        </div>
                                     </div>
-                                    <input type="submit" name="login" class="btn login-form__btn submit w-100" value="Login"  />
-                                </form>
-                                <p class="mt-5 login-form__footer">Dont have account? <a href="page-register.html" class="text-primary">Sign Up</a> now</p>
-                            </div>
+									
+									<div class="col-lg-12">
+                                        <div class="form-group">
+                                            <!-- <label>Authorized Pin <span class="text-danger">*</span></label> -->
+                                            <div class="position-relative">
+                                                <i data-feather="pad-lock" class="fea icon-sm icons"></i>
+                                                <input type="password" class="pl-5 form-control" width="1px;" name="pin" id="pin" placeholder="Enter Your Accredited PIN" required>
+                                            </div>
+                                        </div>
+                                    </div>
+									 
+                                    <!--end col-->
+
+                                    <div class="mb-0 col-lg-12">
+                                        <button class="btn btn-primary btn-block pad" type="submit" name="login">Sign in</button>
+                                    </div>
+                                    <!--end col-->
+
+                                    <div class="text-center col-12">
+                                        <p class="mt-4 mb-0"><small class="mr-2 text-dark">&copy; Copyright  2022 &nbsp; Arubiewe ICT &nbsp; All Rights Reserved.</small>
+                                        </p>
+                                    </div>
+                                </div>
+                                <!--end row-->
+                            </form>
                         </div>
                     </div>
+                    <!---->
                 </div>
+                <!--end col-->
             </div>
+            <!--end row-->
         </div>
-    </div>
-    
+        <!--end container-->
+    </section>
+    <!--end section-->
 
-    
 
-    <!--**********************************
-        Scripts
-    ***********************************-->
-    <script src="plugins/common/common.min.js"></script>
-    <script src="js/custom.min.js"></script>
-    <script src="js/settings.js"></script>
-    <script src="js/gleek.js"></script>
-    <script src="js/styleSwitcher.js"></script>
-</body>
+
+
+                 <script src="https://cointario.com/online/temp/js/jquery-3.5.1.min.js"></script>
+            <script src="https://cointario.com/online/temp/js/bootstrap.bundle.min.js"></script>
+            
+            <!-- SLIDER -->
+            <script src="https://cointario.com/online/temp/js/owl.carousel.min.js"></script>
+            <script src="https://cointario.com/online/temp/js/owl.init.js"></script>
+            <!-- Icons -->
+            <script src="https://cointario.com/online/temp/js/feather.min.js"></script>
+            <script src="https://cointario.com/online/temp/js/bundle.js"></script>
+            
+            
+       
+
+    </body>
 </html>
-
-{{-- @endsection --}}
-
-
-
