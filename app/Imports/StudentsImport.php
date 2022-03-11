@@ -35,6 +35,7 @@ class StudentsImport implements ToModel, WithHeadingRow
             'school'  => $row['school'],
             'combination'  => $row['combination'],
             'current_level'  => $row['level'],
+            'image_path'  => $row['image_path'],
             'department_id' => (int) $this->departmentId,
             'department_minor_id' => (int) $this->departmentMinorId,
             'password' => Hash::make($row['surname']),

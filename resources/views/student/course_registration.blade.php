@@ -2,7 +2,7 @@
 @section('content')
 
     <div class="container alert-primary" align="center" >
-                    <h2>Course Registration</h2>
+                    <h2>Student Course Registration</h2><hr>
                    
                     @foreach($session as $sesn)
                    <h5> {{ $sesn->session }} Academic Session</h5>
@@ -19,10 +19,10 @@
 @endif
 
 
-@if( $message2  = Session::has('success2'))
-<div class="alert alert-danger" role="alert">
+@if( $message2  = Session::get('success2'))
+<div class="alert alert-success" role="alert">
     <button type="button" class="close" data-dismiss="alert">X</button>
-    {{Session::get('success2')}}
+    {{-- {{Session::get('success2')}} --}}
     <strong> {{ $message2 }} </strong>
 </div>
 @endif
@@ -34,13 +34,43 @@
 
 
     <hr/>  
+
+    <form action="course_registration" method="POST" >  
+        @csrf
+{{-- <div class="row">
+    <div class="form-group col-md-4">
+        <td>
+             <label for="opySession">Choose Session</label>
+            <select id="optsession" name="optsession" class="form-control" required>
+                <option value="">Choose...</option>
+                <option value="2020/2021">2020/2021</option>
+                <option value="2022/2023">2022/2023</option>
+                <option value="2023/2024">2023/2024</option>
+                
+            </select>
+        </td>
+    </div>
+
+
+    <div class="form-group col-md-4">
+        <td>
+             <label for="opySemester">Choose Semester</label>
+            <select id="opptsemester" name="optsemester" class="form-control" required>
+                <option value="">Choose...</option>
+                <option value="1">First</option>
+                <option value="2">Second</option>
+                
+                
+            </select>
+        </td>
+    </div>
+</div> --}}
    
             {{-- {{ $course->course_code }} - {{$course->course_title}} --}}
                    
             <div class="container alert-primary">
                
-                <form action="course_registration" method="POST" >  
-                    @csrf
+              
             <table class="table table-hover">
                     
                 <thead>
@@ -71,7 +101,7 @@
         <tr>
             <tr id="course{{$course['id']}}">
             {{-- <td><input type="checkbox" name="course[]" value="{{$course['id']}} {{$course['course_code']}}"></td> --}}
-            <td><input type="checkbox" name="course[]" value="{{$course['id']}}" class="checkbox"></td>
+            <td><input type="checkbox" name="course[]" value="{{$course['id']}}" class="checkbox" ></td>
             {{-- <th scope="row">1</th> --}} {{-- <td>{{ $course-> id }}</td> --}}
             {{-- <td>{{ $course-> course_id }}</td> --}}
             <td> {{ $course['course_code'] }}</td>

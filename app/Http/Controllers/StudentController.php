@@ -130,11 +130,6 @@ public function profile($id){
     ]);
     
     
-   
-
-    
-    
-   
     if ($request->hasFile('image')){
 
         $destination_path = 'public/images/students';
@@ -220,40 +215,47 @@ public function profile($id){
         $loggedUserMatric = Auth('students')->user()->matric_no;
         $user = StudentRegistration::where('student_id', '=', $loggedUser)->first();
         
-        $semester = Semester::where('id', 1)->value('semester_name');
-        $semesterId = Semester::where('id', 1 )->value('id');
-     //dd($semesterId);
       
         $choose_course = $request->input('course');
-        if ($user === null) {
+
+       
+        $current_session = AcademicSession::where('status', 1  )->value('session');
+        $semester = Semester::where('status', 1 )->value('semester_name');
+        $semesterStatus = Semester::where('status', 1  )->value('status');
+        
+        $count =  StudentRegistration::where('session',  $current_session )->where('semester_id', $semesterStatus )->where('student_id', Auth('students')->user()->id )->exists();
+        
+       
+      if ($count === false){
+
         foreach($choose_course as $choose){
         
-        $session = AcademicSession::where('id', 1)->value('session');
-        
+        $session = AcademicSession::where('status', 1  )->value('status');
+          
+           
         
         $registrations = new StudentRegistration();
-        $data = ['student_id' => $loggedUser, 'course_id' => $choose, 'session' => $session, 'semester_id' => $semesterId];
+        $data = ['student_id' => $loggedUser, 'course_id' => $choose, 'session' => $current_session, 'semester_id' => $semesterStatus];
         $registrations->updateOrCreate(
             $data, 
-            ['student_id' => $loggedUser, 'course_id' => $choose, 'session' => $session, 'semester_id' => $semesterId, 'reg_by' => $regBy]
+            ['student_id' => $loggedUser, 'course_id' => $choose, 'session' => $current_session, 'semester_id' => $semesterStatus, 'reg_by' => $regBy]
         );
-        
-        $reg_history = new RegHistory();
-        $data = ['student_id' => $loggedUser, 'matric_no' => $loggedUserMatric];
-        $reg_history->updateOrCreate(
-            $data, 
-            ['student_id' => $loggedUser, 'matric_no' => $loggedUserMatric, 'session' => $session, 'semester' => $semester, 'semester_id' => $semesterId]
-        );
-
-      
     }
 
-    return redirect()->back()->with('success2', 'Course Registration is Successful');
+    $semester = Semester::where('status', 1 )->value('semester_name');
+        //dd($semester);
+        $reg_history = new RegHistory();
+        $data = ['student_id' => $loggedUser, 'matric_no' => $loggedUserMatric,'session' => $current_session, 'semester' => $semester];
+        $reg_history->updateOrCreate(
+            $data, 
+            ['student_id' => $loggedUser, 'matric_no' => $loggedUserMatric, 'session' => $current_session, 'semester' => $semester, 'semester_id' => $semesterStatus]
+        );
 
 
-    
-
-        }
+    return redirect()->back()->with('success2', 'You have successfully Registered Your Courses for  ' . $current_session . ' Academic Session!  Please Ensure you print your course form');
+            
+}
+   
         else { 
             
             $session = AcademicSession::where('id', 1)->value('session');
@@ -270,26 +272,17 @@ public function profile($id){
 
         $department_id = Auth('students')->user()->department_id;
         $department_minor_id = Auth('students')->user()->department_minor_id;
-        //$sessions = AcademicSession::where('id', 1)->value('session');
-       // $courses = Course::where(['department_id' => $department_id, 'department_id'=> 5 ] )->get();//orWhere ('department_id', $department_minor_id)->get();
-        //dd($sessions);
-       // $courses = Course::where([['department_id', '=', 1]])->where('department_id', 5)->orWhere('department_id', $department_minor_id)->get();
-       //$session = DB::SELECT("SELECT * FROM academic_sessions WHERE id = 1"); 
+        
        $session = AcademicSession::where('id', 1 );
        //$session = AcademicSession::where('id', 1)->value('session');
-        $courses = Course::where('department_id', '=', 5)
+       $semester_status = Semester::where('status', 1  )->value('status');
+
+
+           $courses = Course::where('semester_id', '=', $semester_status )->orWhere('department_id', '=', 5)
                         ->orWhere('department_id', '=', $department_id)
-                        ->orWhere('department_id', '=', $department_minor_id)
+                        ->orWhere('department_id', '=', $department_minor_id)->orderBy('course_code', 'ASC')
                         ->get();
-        //$courses = DB::SELECT("SELECT * FROM courses WHERE department_id = 5 AND department_id = '$department_id'");
-        //dd($courses);
-        //$gen_course_id = 10001;
-        //$general_courses = GeneralCourse::where('department_id', 10001  )->get()->toArray();
-       // $courses = array_merge($general_courses , $dptcourses);        
-        //dd($department_minor_id);
-       // return 'my courses';
-         //return View::make("student/course_registration", compact('courses', 'session'));
-         return view('student/course_registration', compact('courses', 'session'));
+             return view('student/course_registration', compact('courses', 'session'));
          //return View::make("student/course_registration", compact('session'));
     }
     
@@ -304,8 +297,13 @@ public function profile($id){
         //$session = DB::SELECT("SELECT * FROM academic_sessions WHERE id = 1"); 
         //dd($session);
        $session = AcademicSession::where('id', 1 );
+
        
-       $registration = StudentRegistration::where( 'student_id',  Auth('students')->user()->id )
+     $currentSemesterStatus = Semester::where('status', 1)->value('status');
+
+       //dd($currentSemesterStatus);
+       
+       $registration = StudentRegistration::where( 'student_id',  Auth('students')->user()->id )->where('semester_id', $currentSemesterStatus )
                                             ->with('student', 'course')->get();
 
        // $reg = StudentRegistration::where('student_id', 2)->with('student', 'course')->get();
@@ -329,7 +327,7 @@ public function profile($id){
         //dd($studentcourses->session);
        
        // $courses = StudentRegistration::where('student_id', $studentcourses->student_id)->where('session', $studentcourses->session)->get();
-       $courses = StudentRegistration::where('student_id', Auth('students')->user()->id )->where('session', $studentcourses->session)->orWhere('semester_id', $semesters->id )->get();
+       $courses = StudentRegistration::where('student_id', Auth('students')->user()->id )->where('session', $studentcourses->session)->Where('semester_id', $semesters->id )->get();
        //dd($courses);
        
         return view('student.registration_history', compact('studentcourses', 'session', 'courses', 'semesters'));

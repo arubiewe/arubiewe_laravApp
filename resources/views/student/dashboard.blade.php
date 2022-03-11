@@ -35,7 +35,7 @@
         <h4> DEPT:  {{Auth::guard('students')->user()->combination }}</h4>
           
           @foreach($dashbaordSession as $dsession)
-          <h5 style="color:blue"> {{ $dsession->session }} Academic Session</h5>
+          <h5 style="color:rgb(255, 0, 0)"> Current Academic Session: {{ $dsession->session }} </h5>
           
             {{-- $session = StudentSession::where('id', 1)->value('session');  --}}
         {{-- $uss = Auth('students')->user()->matric_no; --}}

@@ -117,7 +117,7 @@ class CustomAuthController extends Controller
  
                 // Thecheck user is logged in...
                 //dd($user);  
-                return View::make("student/dashboard", compact('dashbaordSession', 'vendors'));  
+                    return View::make("student/dashboard", compact('dashbaordSession', 'vendors'));  
             }
            
             //return view ('student/dashboard');

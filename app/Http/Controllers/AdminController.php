@@ -37,7 +37,8 @@ class AdminController extends Controller
     
     public function getdepartmentoption(){
         
-        $department = Department::all();
+        // $department = Department::all();
+        $department = Department::orderBy('name', 'ASC')->get();
         //dd($department);
         return View::make('admin_dashboard.upload_courses', compact('department'));
         
@@ -45,8 +46,8 @@ class AdminController extends Controller
 
     public function getstudentdepartmentoption(){
         
-        $optiondepttmajor = Department::all();
-        $optiondepttminor = Department::all();
+        $optiondepttmajor = Department::orderBy('name', 'ASC')->get();
+        $optiondepttminor = Department::orderBy('name', 'ASC')->get();
         //dd($department);
         return View::make('admin_dashboard.upload_students', compact('optiondepttmajor', 'optiondepttminor'));
         
