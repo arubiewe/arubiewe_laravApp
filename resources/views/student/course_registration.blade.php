@@ -3,11 +3,13 @@
 
     <div class="container alert-primary" align="center" >
                     <h2>Student Course Registration</h2><hr>
-                   
-                    @foreach($session as $sesn)
+            <p>
+                {{-- @foreach($displaysession as $sesn)
                    <h5> {{ $sesn->session }} Academic Session</h5>
-                   <marquee class="alert-primary"><b>Note:</b> Please ensure you select the appropriate/correct course for this section, without a successful course registration, No Result</marquee>
-@endforeach
+                   <h1 class="alert-primary"><b>Note:</b> Please ensure you select the appropriate/correct course for this section, without a successful course registration, No Result</h1>
+                @endforeach --}}
+
+            </p>
 
 @if ($message =  Session::get('errormsg'))
 <div class="alert alert-danger alert-block">

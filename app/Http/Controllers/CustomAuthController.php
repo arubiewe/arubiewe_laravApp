@@ -41,23 +41,14 @@ class CustomAuthController extends Controller
         
         //dd($request->get('pin'));
         
-
-        
-       
-
-
         $user_data = array(
-
             'matric_no'  => $request->get('matricno'),
             'password'  => strtoupper($request->get('password')),
-           
         );
 
         $user_data2 = array(
 
             'pin'  => $request->get('pin'),    
-
-            
         );
 
         $vendors = Vendor::where('pin', $user_data2 )->value('pin');
@@ -79,26 +70,15 @@ class CustomAuthController extends Controller
         }
         else{
 
-           
-
-
-
-        
-
-
-       
        //dd($user_data2);
-        
-       
+               
          if(Auth::guard('students')->attempt($user_data) ) 
         {
             //return redirect ('student/dashboard');
             $user_id= Auth::guard('students');
             $ven_id= Auth::guard('vendors');
 
-           
-           
-           
+
             $user = Auth::guard('students');
             //$vendors = Auth::guard('vendors');
             //$profiles = Student::find($user);
@@ -112,20 +92,14 @@ class CustomAuthController extends Controller
             ///dd($vendors);
 
             if (Auth::guard('students')->check()) {
-
-               //dd(Auth::guard('vendors'));
- 
                 // Thecheck user is logged in...
                 //dd($user);  
                     return View::make("student/dashboard", compact('dashbaordSession', 'vendors'));  
             }
            
             //return view ('student/dashboard');
-            
-           
-            
         
-    }
+        }
         else {
 
             return back()->with('error', 'Invalid Login Credentials ');
@@ -133,7 +107,7 @@ class CustomAuthController extends Controller
         }
     }
 
-    }
+}
 
 
     public function show(){
