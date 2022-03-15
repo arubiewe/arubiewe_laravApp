@@ -93,7 +93,7 @@ class CustomAuthController extends Controller
 
             if (Auth::guard('students')->check()) {
                 // Thecheck user is logged in...
-                //dd($user);  
+               // dd(Auth::guard('students'));  
                     return View::make("student/dashboard", compact('dashbaordSession', 'vendors'));  
             }
            

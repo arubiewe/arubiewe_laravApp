@@ -102,7 +102,7 @@ class StudentController extends Controller
                 //->orWhereIn('deparment_id',[5])
                 ->where('department_id', '=', $department_minor_id)
                 // ->orWhere('department_id', '=', 5) 
-               
+                ->orderBy('course_code', 'ASC')
                 ->get()->toArray();
 
 
