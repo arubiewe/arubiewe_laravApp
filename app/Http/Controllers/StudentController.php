@@ -83,34 +83,10 @@ class StudentController extends Controller
                                 ->whereIn('department_id', [$department_id, $department_minor_id, 5])
                                 ->orderBy('course_code', 'ASC')
                                 ->get();
-
-                                //dd($courses);
-
          //dd($semester_status->id);
-
-    //   $general_courses = Course::where('semester_id',  $semester_status->id )    
-    //             ->where('department_id', 5)                           
-    //             ->orderBy('course_code', 'ASC')
-    //             ->get()->toArray();
-    //     $courses1 = Course::where('semester_id',  $semester_status->id )
-    //             ->where('department_id', '=', $department_id)                   
-    //             ->orderBy('course_code', 'ASC')
-    //             ->get()->toArray();
-    //     $courses2 = Course::where('semester_id',  $semester_status->id )
-    //             ->where('department_id', '=', $department_minor_id)
-    //             ->orderBy('course_code', 'ASC')
-    //             ->get()->toArray();
-        // $courses = array_merge($general_courses, $courses1, $courses2);
-       // dd(count($courses));
-    
-    
-        // $courses = Course::orWhere('semester_id', '=', $semester_status->id )->where('department_id', '=', 5)
-    // ->orWhere('department_id', $department_id)
-    // ->orWhere('department_id', $department_minor_id)->orderBy('course_code', 'ASC')
-    // ->get();
-       
-             
-
+         //dd(count($courses));
+        //dd($courses);
+        
         return view('student/course_registration', compact('courses',  'session'));
          //return View::make("student/course_registration", compact('session'));
     }
