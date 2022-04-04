@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\{Department};
 Use App\Course;
 Use App\Student;
+Use App\Semester;
 use View;
 
 class AdminController extends Controller
@@ -58,6 +59,9 @@ class AdminController extends Controller
     public function store(Request $request){
         
         $selectedDept = $request->get('optiondept');
+        $semester_id = Semester::where('status', 1)->first();
+
+        //dd($semester_id->status);
             
             //$selectedCurriculum = $request->get('multiInput[0][isoldcurriculum]');
             //dd($selectedCurriculum);
@@ -75,6 +79,7 @@ class AdminController extends Controller
                 $upload_course->course_unit = $data['unit'];
                 $upload_course->course_status = $data['status'];
                 $upload_course->semester = $data['semester'];
+                $upload_course->semester_id = $semester_id->status;
                 $upload_course->department_id = $selectedDept;
                 $upload_course->is_general = $data['isgeneral'];
                 $upload_course->is_oldcurriculum = $data['isoldcurriculum'];

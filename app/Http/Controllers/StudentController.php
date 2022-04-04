@@ -77,39 +77,39 @@ class StudentController extends Controller
 
         $session = AcademicSession::where('status', 1)->first();
         $semester_status = Semester::where('status', 1)->first();
-      // dd($semester_status, $session);
+    
 
-      $general_courses = Course::where('semester_id', '=',  $semester_status->status )
-            
-                ->where('department_id', '=', 5)                     
-                
-                ->orderBy('course_code', 'ASC')
-                ->get()->toArray();
+        $courses = Course::where('semester_id', $semester_status->id)
+                                ->whereIn('department_id', [$department_id, $department_minor_id, 5])
+                                ->orderBy('course_code', 'ASC')
+                                ->get();
 
+                                //dd($courses);
 
-        $courses1 = Course::where('semester_id', '=',  $semester_status->status )
-                        //->where('semester', 'First')
-                        //->orWhereIn('deparment_id',[5])
-                ->where('department_id', '=', $department_id)
-                // ->orWhere('department_id', '=', $department_minor_id)
-                // ->orWhere('department_id', '=', 5)                     
-                
-                ->orderBy('course_code', 'ASC')
-                ->get()->toArray();
+         //dd($semester_status->id);
 
-        $courses2 = Course::where('semester_id', '=',  $semester_status->status )
-                //->where('semester', 'First')
-                //->orWhereIn('deparment_id',[5])
-                ->where('department_id', '=', $department_minor_id)
-                // ->orWhere('department_id', '=', 5) 
-                ->orderBy('course_code', 'ASC')
-                ->get()->toArray();
-
-
-        $courses = array_merge($general_courses, $courses1, $courses2);
-
+    //   $general_courses = Course::where('semester_id',  $semester_status->id )    
+    //             ->where('department_id', 5)                           
+    //             ->orderBy('course_code', 'ASC')
+    //             ->get()->toArray();
+    //     $courses1 = Course::where('semester_id',  $semester_status->id )
+    //             ->where('department_id', '=', $department_id)                   
+    //             ->orderBy('course_code', 'ASC')
+    //             ->get()->toArray();
+    //     $courses2 = Course::where('semester_id',  $semester_status->id )
+    //             ->where('department_id', '=', $department_minor_id)
+    //             ->orderBy('course_code', 'ASC')
+    //             ->get()->toArray();
+        // $courses = array_merge($general_courses, $courses1, $courses2);
+       // dd(count($courses));
+    
+    
+        // $courses = Course::orWhere('semester_id', '=', $semester_status->id )->where('department_id', '=', 5)
+    // ->orWhere('department_id', $department_id)
+    // ->orWhere('department_id', $department_minor_id)->orderBy('course_code', 'ASC')
+    // ->get();
        
-                //dd($courses);
+             
 
         return view('student/course_registration', compact('courses',  'session'));
          //return View::make("student/course_registration", compact('session'));
@@ -152,19 +152,20 @@ class StudentController extends Controller
                 ->where('student_id', Auth('students')->user()->id )
                 ->exists();
         
-     if ($count === false){
+     if ($count === false || $current_session->session === '2020/2021' || $semesterStatus === 'First'  ){
 
         foreach($choose_course as $choose){
         
+           
        // $session = AcademicSession::where('status', 1  )->value('status');
         $session = AcademicSession::where('status', 1)->first();
            
 
         $registrations = new StudentRegistration();
-        $data = ['student_id' => $loggedUser, 'course_id' => $choose, 'session' => $current_session->session, 'semester_id' => $semesterStatus->status];
+        $data = ['student_id' => $loggedUser, 'course_id' => $choose, 'session' => $current_session->session, 'semester_id' => $semesterStatus->id];
         $registrations->updateOrCreate(
             $data, 
-            ['student_id' => $loggedUser, 'course_id' => $choose, 'session' => $current_session->session, 'semester_id' => $semesterStatus->status, 'reg_by' => $regBy]
+            ['student_id' => $loggedUser, 'course_id' => $choose, 'session' => $current_session->session, 'semester_id' => $semesterStatus->id, 'reg_by' => $regBy]
         );
     }
 
@@ -176,7 +177,7 @@ class StudentController extends Controller
         $data = ['student_id' => $loggedUser, 'matric_no' => $loggedUserMatric,'session' => $current_session->session, 'semester' => $semester->semester_name];
         $reg_history->updateOrCreate(
             $data, 
-            ['student_id' => $loggedUser, 'matric_no' => $loggedUserMatric, 'session' => $current_session->session, 'semester' => $semester->semester_name, 'semester_id' => $semesterStatus->status]
+            ['student_id' => $loggedUser, 'matric_no' => $loggedUserMatric, 'session' => $current_session->session, 'semester' => $semester->semester_name, 'semester_id' => $semesterStatus->id]
         );
 
 

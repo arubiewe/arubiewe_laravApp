@@ -114,39 +114,57 @@
             <td>{{ $course['is_oldcurriculum'] }}</td>
             
         </tr>
+        
             @endforeach
-
+            <hr>
+            <strong><input type="checkbox" name="checkAll" id="select_all" > CheckAll </strong>
            
         </tbody>
       
                
     </table>
-    <button type="submit" name="selectAll" class="btn btn-success"> CheckAll </button>
+    
+    
     <div class="" align="center">
+        
     <button type="submit" name="" class="btn btn-danger"> Register </button>
     </div>
 
                 </form>
+
+                
             </div>      
 
 
 
 
             <script>
-<script type="text/javascript" profile="javascript" src=" http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">
+<script type="text/javascript" profile="javascript" src=" http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"/>
 	</script>
-<script>
-         $(document).ready(function() {
-             // select All
-             $('.selectAll').click(function() {
-                 $(":checkbox").attr("checked", true);
-             });
-             // deselect All
-             $('.deselectAll').click(function() {
-                 $(":checkbox").attr("checked", false);
-             });
-         });
-      </script>
-  
-</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#select_all').on('click',function(){
+            if(this.checked){
+                $('.checkbox').each(function(){
+                    this.checked = true;
+                });
+            }else{
+                 $('.checkbox').each(function(){
+                    this.checked = false;
+                });
+            }
+        });
+        
+        $('.checkbox').on('click',function(){
+            if($('.checkbox:checked').length == $('.checkbox').length){
+                $('#select_all').prop('checked',true);
+            }else{
+                $('#select_all').prop('checked',false);
+            }
+        });
+    });
+    </script>
+
  @endsection
