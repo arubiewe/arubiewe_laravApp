@@ -193,12 +193,21 @@ class StudentController extends Controller
     public function showreghistory($id)
     {
         
-        $session = AcademicSession::where('status', 1)->first();
+        $session = AcademicSession::where('status', 1)->get();
+
+
+        //dd($session);
         $studentcourses = RegHistory::with('course', 'student' )->findOrFail($id);
-        $semesters = Semester::with('reghistory', 'student')->findOrFail($id);
+        $semesters = Semester::with('reghistory', 'student')->where('status', 1 )->findOrFail($id);
+        //$semesterStatus = Semester::where('status', 1)->first();
+        //dd($semesters->id);
+        //dd($session->session);
        // $courses = StudentRegistration::where('student_id', $studentcourses->student_id)->where('session', $studentcourses->session)->get();
-       $courses = StudentRegistration::where('student_id', Auth('students')->user()->id )->where('session', $studentcourses->session)->Where('semester_id', $semesters->id )->get();
-       //dd($courses);
+
+       //$sessn = StudentRegistration::where('student_id', $studentcourses->student_id)->where('session', $studentcourses->session)->get();
+       //dd($studentcourses->session);
+       $courses = StudentRegistration::where('student_id', Auth('students')->user()->id )->where('session', $studentcourses->session)->where('student_id', $studentcourses->student_id)->where('semester_id', $semesters->id )->get();
+       
         return view('student.registration_history', compact('studentcourses', 'session', 'courses', 'semesters'));
     }
 
