@@ -16,7 +16,7 @@
 <div class="container-fluid"> --}}
     <div class="container-fluid">
       <form method="POST" action="/admin_dashboard/course_reg" >
-        @csrf
+       
       
 <div class="form-row">
     <div class="form-group col-md-2">

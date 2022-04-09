@@ -21,7 +21,7 @@
       <td> {{ $history->matric_no }} </td>
       <td>{{ $history->session }}</td>
       <td>{{ $history->semester }}</td>
-      <td><li> <a href="/student/registration_history/{{$history->id}}" class="btn btn alert-danger"> View <li></td>
+      <td><li> <a href="/student/registration_history/{{$history->id}}/{{ $history->semester}}" class="btn btn alert-danger"> View <li></td>
       
     </tr>
     

@@ -74,21 +74,16 @@ class StudentController extends Controller
         $department_id = Auth('students')->user()->department_id;
         $department_minor_id = Auth('students')->user()->department_minor_id;
         
-
         $session = AcademicSession::where('status', 1)->first();
         $semester_status = Semester::where('status', 1)->first();
     
-
         $courses = Course::where('semester_id', $semester_status->id)
                                 ->whereIn('department_id', [$department_id, $department_minor_id, 5])
                                 ->orderBy('course_code', 'ASC')
                                 ->get();
-         //dd($semester_status->id);
          //dd(count($courses));
-        //dd($courses);
-        
         return view('student/course_registration', compact('courses',  'session'));
-         //return View::make("student/course_registration", compact('session'));
+
     }
     
 
@@ -106,8 +101,6 @@ class StudentController extends Controller
         }
 
         $regBy =  Session::get('ven_name');
-
-        //dd($regBy);
         //dd(Session::get('ven_name'));
       
         $loggedUser = Auth('students')->user()->id;
@@ -116,11 +109,8 @@ class StudentController extends Controller
         
       
         $choose_course = $request->input('course');
-       // $current_session = AcademicSession::where('status', 1  )->value('session');
         $current_session = AcademicSession::where('status', 1)->first();
-      
         $semester = Semester::where('status', 1)->first();
-        //$semesterStatus = Semester::where('status', 1  )->value('status');
         $semesterStatus = Semester::where('status', 1)->first();
         
         $count =  StudentRegistration::where('session',  $current_session->session )
@@ -132,11 +122,7 @@ class StudentController extends Controller
 
         foreach($choose_course as $choose){
         
-           
-       // $session = AcademicSession::where('status', 1  )->value('status');
         $session = AcademicSession::where('status', 1)->first();
-           
-
         $registrations = new StudentRegistration();
         $data = ['student_id' => $loggedUser, 'course_id' => $choose, 'session' => $current_session->session, 'semester_id' => $semesterStatus->id];
         $registrations->updateOrCreate(
@@ -145,10 +131,7 @@ class StudentController extends Controller
         );
     }
 
-    //$semester = Semester::where('status', 1 )->value('semester_name');
         $semester = Semester::where('status', 1)->first();
-
-        //dd($semester);
         $reg_history = new RegHistory();
         $data = ['student_id' => $loggedUser, 'matric_no' => $loggedUserMatric,'session' => $current_session->session, 'semester' => $semester->semester_name];
         $reg_history->updateOrCreate(
@@ -163,10 +146,7 @@ class StudentController extends Controller
    
         else { 
             
-            //$session = AcademicSession::where('id', 1)->value('session');
             $session = AcademicSession::where('status', 1)->first();
-            
-           // return 'You have registered already for the '. $session . ' Academic Session' ;
             return redirect()->back()->with('errormsg', 'You have registered already for the ' . $session->session .  ' Academic Session' );  
         
         }
@@ -174,14 +154,11 @@ class StudentController extends Controller
 
     }
 
-    
-    
-
+     
     public function studentcourseregistration(){
 
         $imageOwner = Student::where('id', Auth('students')->user()->id )->get();
         $session = AcademicSession::where('status', 1)->first();
-     //$currentSemesterStatus = Semester::where('status', 1)->value('status');
         $currentSemesterStatus = Semester::where('status', 1)->first();
         $registration = StudentRegistration::where( 'student_id',  Auth('students')->user()->id )
                         ->where('semester_id', $currentSemesterStatus->status )
@@ -190,34 +167,27 @@ class StudentController extends Controller
 
     }
 
-    public function showreghistory($id)
+    public function showreghistory($id, $semester)
     {
         
         $session = AcademicSession::where('status', 1)->get();
 
-
-        //dd($session);
-        $studentcourses = RegHistory::with('course', 'student' )->findOrFail($id);
-        $semesters = Semester::with('reghistory', 'student')->where('status', 1 )->findOrFail($id);
-        //$semesterStatus = Semester::where('status', 1)->first();
-        //dd($semesters->id);
-        //dd($session->session);
-       // $courses = StudentRegistration::where('student_id', $studentcourses->student_id)->where('session', $studentcourses->session)->get();
-
-       //$sessn = StudentRegistration::where('student_id', $studentcourses->student_id)->where('session', $studentcourses->session)->get();
-       //dd($studentcourses->session);
-       $courses = StudentRegistration::where('student_id', Auth('students')->user()->id )->where('session', $studentcourses->session)->where('student_id', $studentcourses->student_id)->where('semester_id', $semesters->id )->get();
+        $studentcourses = RegHistory::with('course', 'student' )->where('id', $id)->first();
+        $semesters = Semester::with('reghistory', 'student')->where('semester_name', $semester)->first();
+        
+        $courses = StudentRegistration::where('student_id', Auth('students')->user()->id )
+                                        ->where('session', $studentcourses->session)
+                                        ->where('student_id', $studentcourses->student_id)
+                                        ->where('semester_id', $semesters->id )->get();
        
         return view('student.registration_history', compact('studentcourses', 'session', 'courses', 'semesters'));
     }
 
 
-
-
     public function viewregistration(){
         //$reghistory = RegHistory::where( 'student_id',  Auth('students')->user()->id );
         $reghistory = RegHistory::where( 'student_id',  Auth('students')->user()->id )
-                    ->with('student', 'course')->get();
+                                ->with('student', 'course')->get();
 
         return view('student.view_registration', compact('reghistory'));
 
@@ -227,25 +197,13 @@ class StudentController extends Controller
     public function profile($id){
 
         $profiles = Student::find($id);
-        //dd($profiles);
-       
         return view('student.profile' , compact('profiles', 'id'));
-        //return view('student.registration_history', compact('studentcourses', 'session', 'courses', 'semesters'));
-    
-        // return view('student.profile_update');
-    
      }
     
      public function update($id){
-    
-        
+
         $student = Student::find($id);
-        //dd($profiles);
-       
         return view('student.profile' , compact('profiles', 'id'));
-        //return view('student.registration_history', compact('studentcourses', 'session', 'courses', 'semesters'));
-    
-        // return view('student.profile_update');
     
      }
     
@@ -314,11 +272,9 @@ class StudentController extends Controller
         $student->image_path = $input['image_path'];
         
         $student->save();
-        
-        //dd($request->all());
-        //return redirect()->back()->with('message2', 'Course Registration is Successful');
         return redirect('student/dashboard')->with('message2', 'Your Profile is Now Updated !');
-     }
+     
+    }
     
     
     

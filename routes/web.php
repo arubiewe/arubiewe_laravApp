@@ -24,7 +24,7 @@ Route::get('/', function () {
 
 Route::get('/index', 'CourseController@index');
 
-//  Route::get('/welcome', 'CourseController@index');
+
 
 
 Route::get('admin_dashboard/dashboard', 'AdminController@index');
@@ -69,40 +69,27 @@ Route::post('student/course_registration', 'StudentController@store');
 Route::get('student/course_form', 'StudentController@studentcourseregistration');
 Route::get('student/view_registration', 'StudentController@viewregistration');
 //Route::get('student/show/{id}','StudentController@showreghistory')->name('student.show');
-Route::get('student/registration_history/{id}','StudentController@showreghistory')->name('student.registration_history');
+Route::get('student/registration_history/{id}/{semester}','StudentController@showreghistory')->name('student.registration_history');
 Route::get('student/profile/{id}', 'StudentController@profile')->name('student.profile');
 Route::patch('student/profile/{id}', 'StudentController@profileupdate');
  
 
+//University Route 
+Route::get('UniversityApp/Admission', 'UniversityController@index');
+// Route::get('UniversityApp/Admission', 'UniversityController@create');
+Route::post('UniversityApp/Admission/lasued_apply', 'UniversityController@store');
 
 
-// Route::get('student/dashboard/studentcourse', 'StudentController@studentcourse');
+
+
 
 Route::get('hash', function(){
  dd(Hash::make("ARUBIEWE"));
 
 
 });
-Route::get('pin', function(){
-    dd(Hash::make("111"));
-   
-   
-   });
-
-// Route::post('/student/checklogin', 'StudentController@checklogin');
-// Route::get('student/successlogin', 'StudentController@successlogin');
-// Route::get('/student/logout', 'StudentController@logout');
 
 
-// Route::get('admin_dashboard/dashboard', function () {
-      
-//     return view('admin_dashboard.dashboard');
-// });
-
-// Route::get('admin_dashboard/course_reg', function () {
-      
-//     return view('admin_dashboard.course_reg');
-// });
 
 
 
