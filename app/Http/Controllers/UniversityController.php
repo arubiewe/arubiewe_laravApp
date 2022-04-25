@@ -30,7 +30,7 @@ class UniversityController extends Controller
        $university_applicants = new UniversityApplicant();
       
       
-       //dd($request->all());
+       dd($request->all());
        $university_applicants->applicant_id = $uuid;
        $university_applicants->application_no = $application_no ;
        $university_applicants->jamb_no = request('jambno');
@@ -43,7 +43,7 @@ class UniversityController extends Controller
 
        $university_applicants->save();
 
-       return redirect()->back()->with('You have successfully Registered Your Courses for ');
+       return redirect()->back()->with('Application was successfull');
 
 
     }
